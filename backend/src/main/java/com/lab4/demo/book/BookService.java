@@ -4,14 +4,12 @@ import com.lab4.demo.book.model.Book;
 import com.lab4.demo.book.model.dto.BookDTO;
 import com.lab4.demo.report.ReportServiceFactory;
 import com.lab4.demo.report.ReportType;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,14 +77,6 @@ public class BookService {
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
         //return books;
-    }
-
-    private HttpResponse<String> findSongs () throws UnirestException {
-        HttpResponse<String> response = Unirest.get("https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=multi&offset=0&limit=10&numberOfTopResults=5")
-                .header("X-RapidAPI-Host", "spotify23.p.rapidapi.com")
-                .header("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
-                .asString();
-        return response;
     }
 
     }

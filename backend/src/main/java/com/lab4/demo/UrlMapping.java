@@ -2,6 +2,8 @@ package com.lab4.demo;
 
 public class UrlMapping {
     public static final String API_PATH = "/api";
+    public static final String TRACKS = API_PATH+"/tracks";
+
     public static final String BOOKS = API_PATH + "/items";
 
     public static final String BOOKS_ID_PART = "/{id}";

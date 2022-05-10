@@ -4,7 +4,7 @@ import UserList from "../views/UserList.vue";
 import ItemList from "../views/ItemList.vue";
 import { auth as store } from "../store/auth.module";
 import Login from "../views/Login";
-import ItemAdmin from "@/views/ItemAdmin";
+import Tracks from "../views/Tracks";
 
 Vue.use(VueRouter);
 
@@ -22,7 +22,7 @@ const routes = [
       if (store.getters.isAdmin) {
         next();
       } else {
-        next({ name: "Items" });
+        next({ name: "Tracks" });
       }
     },
   },
@@ -39,9 +39,9 @@ const routes = [
     },
   },
   {
-    path: "/itemsAdmin",
-    name: "ItemsAdmin",
-    component: ItemAdmin,
+    path: "/tracks",
+    name: "Tracks",
+    component: Tracks,
     beforeEnter: (to, from, next) => {
       if (store.state.status.loggedIn) {
         next();
@@ -50,6 +50,7 @@ const routes = [
       }
     },
   },
+
   {
     path: "/about",
     name: "About",

@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     goBooks() {
-      this.$router.push("/itemsAdmin");
+      this.$router.push("/tracks");
     },
     editUser(user) {
       this.selectedUser = user;
