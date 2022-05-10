@@ -934,6 +934,31 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@cycjimmy/awesome-js-funcs@^2.4.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/awesome-js-funcs/-/awesome-js-funcs-2.7.0.tgz#df8c5675f9c4c80b070c7d0660b6953acf9d92e5"
+  integrity sha512-LVYZLY3cAKc3j8L9TJy+I2CwWyPTPxjJ2wJsr2VSxiP+PGdKxI2GAH4s8maynkIWq0/QyGUFi5yoyBk1+aLntQ==
+
+"@cycjimmy/h5-audio-controls@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/h5-audio-controls/-/h5-audio-controls-3.4.1.tgz#88a6ea14cacd010d931458c050d7ba0f1e2399c7"
+  integrity sha512-gB3MIGz3S5c/AP956e8Q8II1MwbVYWF2rLa5H4HvPZhCU3B0hvIL46NQmllvnNLcOuYelG7sc0aUmDGbhJ4qHA==
+  dependencies:
+    "@cycjimmy/awesome-js-funcs" "^2.4.0"
+    "@cycjimmy/sass-lib" "^1.0.3"
+
+"@cycjimmy/sass-lib@^1.0.3":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/sass-lib/-/sass-lib-1.1.0.tgz#94c5d454d7ca67f5c09a924f7f26a9f180461072"
+  integrity sha512-eMN9QMtiPfiDqdJvE8agBOR53lGJXkz2pOy8lhttsuOBzfmf3gs10Uf0ogX/rjt3U7//ZSqKckRT/br1S2uZ6A==
+
+"@cycjimmy/vue-h5-audio-controls@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/vue-h5-audio-controls/-/vue-h5-audio-controls-1.1.0.tgz#7283164dca763577cb998dafb754c1bfc76a36a2"
+  integrity sha512-2rRe0NcsvtUPW1WvryOF2nm0ebeazA9Dvh5J8Ob5ZKg3t1Hl4tdIxrPlTFvgbzAt/XlziKK8ql6r/wsim4yK7g==
+  dependencies:
+    "@cycjimmy/h5-audio-controls" "3.4.1"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

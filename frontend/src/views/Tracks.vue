@@ -35,7 +35,7 @@ export default {
           sortable: false,
           value: "title",
         },
-        { text: "Id", value: "id" },
+        { text: "id", value: "id" },
         { text: "link", value: "link" },
         { text: "duration", value: "duration" },
         { text: "explicit_lyrics", value: "explicit_lyrics"},
