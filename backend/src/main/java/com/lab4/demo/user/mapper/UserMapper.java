@@ -1,5 +1,6 @@
 package com.lab4.demo.user.mapper;
 
+import com.lab4.demo.track.model.Track;
 import com.lab4.demo.user.dto.UserListDTO;
 import com.lab4.demo.user.dto.UserMinimalDTO;
 import com.lab4.demo.user.model.User;
@@ -30,6 +31,11 @@ public interface UserMapper {
     default void populateRoles(User user, @MappingTarget UserListDTO userListDTO) {
         userListDTO.setRoles(user.getRoles().stream().map(role -> role.getName().name()).collect(Collectors.toSet()));
         //userListDTO.setRoles(user.getRoles());
+    }
+
+    @AfterMapping
+    default void populatetracks(User user, @MappingTarget UserListDTO userListDTO){
+        userListDTO.setRoles(user.getPurchasedTracks().stream().map(Track::getTitle).collect(Collectors.toSet()));
     }
 
 

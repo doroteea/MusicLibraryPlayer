@@ -1,5 +1,11 @@
 package com.lab4.demo.user;
 
+import com.lab4.demo.playlist.PlaylistMapper;
+import com.lab4.demo.playlist.model.Playlist;
+import com.lab4.demo.playlist.model.dto.PlaylistDTO;
+import com.lab4.demo.track.TrackMapper;
+import com.lab4.demo.track.model.Track;
+import com.lab4.demo.track.model.TrackDTO;
 import com.lab4.demo.user.dto.UserListDTO;
 import com.lab4.demo.user.dto.UserMinimalDTO;
 import com.lab4.demo.user.mapper.UserMapper;
@@ -11,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +31,8 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final TrackMapper trackMapper;
+    private final PlaylistMapper playlistMapper;
 
     public User findById(Long id) throws UserNotFoundException {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: "+id));
@@ -40,6 +49,7 @@ public class UserService {
                 .stream().map( user ->{
                             UserListDTO userListDTO = userMapper.userListDtoFromUser(user);
                             userMapper.populateRoles(user,userListDTO);
+                            userMapper.populatetracks(user,userListDTO);
                             return userListDTO;
                         }
                 ).collect(toList());
@@ -89,4 +99,37 @@ public class UserService {
     public Boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    public UserListDTO buyTrack(UserListDTO userListDTO, TrackDTO trackDTO){
+        User user = userMapper.userfromUserListDto(userListDTO);
+        Track track = trackMapper.fromDto(trackDTO);
+        List<Track> tracks = userListDTO.getPurchasedTracks();
+        tracks.add(track);
+        user.setPurchasedTracks(new HashSet<Track>(tracks));
+        return userMapper.userListDtoFromUser(userRepository.save(user));
+    }
+
+    public UserListDTO createPlaylist(UserListDTO userListDTO, PlaylistDTO playlistDTO){
+        User user = userMapper.userfromUserListDto(userListDTO);
+        Playlist playlist = playlistMapper.fromDTO(playlistDTO);
+        List<Playlist> playlists = userListDTO.getPlaylistList();
+        playlists.add(playlist);
+        user.setPlaylistList(playlists);
+        return userMapper.userListDtoFromUser(userRepository.save(user));
+    }
+
+    public UserListDTO deletePlaylist(UserListDTO userListDTO, PlaylistDTO playlistDTO){
+        User user = userMapper.userfromUserListDto(userListDTO);
+        //user.getPlaylistList().removeIf(playlist -> playlist.getId().equals(playlistDTO.getId()));
+        for (Iterator<Playlist> iterator = user.getPlaylistList().iterator(); iterator.hasNext(); ) {
+            Playlist playlist = iterator.next();
+            if (playlist.getId().equals(playlistDTO.getId())) {
+                iterator.remove();
+            }
+        }
+        //userListDTO.setPlaylistList(playlists);
+        return userMapper.userListDtoFromUser(userRepository.save(user));
+    }
+
+
 }
