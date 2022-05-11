@@ -7,12 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class BookServiceIntegrationTest {
@@ -57,7 +54,7 @@ class BookServiceIntegrationTest {
         List<Book> bookList = TestCreationFactory.listOf(Book.class);
         Book book1 = Book.builder()
                 .title("merry")
-                .author("christams")
+                .author("christmas")
                 .genre("yye")
                 .price(12.12)
                 .quantity(21)

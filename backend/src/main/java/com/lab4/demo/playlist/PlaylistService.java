@@ -18,7 +18,7 @@ public class PlaylistService {
 
     private Playlist findById(Long id) {
         return playlistRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Playlist not found: " + id));
     }
 
     public List<PlaylistDTO> findAll() {
@@ -36,12 +36,13 @@ public class PlaylistService {
     }
 
     public PlaylistDTO update(Long id, PlaylistDTO playlistDTO) {
-        Playlist playlist = findById(id);
-        playlist.setTitle(playlistDTO.getTitle());
-        playlist.setTracks(playlistDTO.getTracks());
-        playlist.setDuration();
+        Playlist actPlaylist = findById(id);
+        actPlaylist.setTitle(playlistDTO.getTitle());
+        actPlaylist.setTracks(playlistDTO.getTracks());
+        actPlaylist.setDuration();
         return playlistMapper.toDTO(
-                playlistRepository.save(playlist));
+                playlistRepository.save(actPlaylist)
+        );
     }
 
     public void delete(Long id) {

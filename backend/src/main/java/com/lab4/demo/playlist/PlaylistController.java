@@ -34,7 +34,7 @@ public class PlaylistController {
         return playlistService.update(id, playlistDTO);
     }
 
-    @DeleteMapping
+    @DeleteMapping(PLAYLIST_ID_PART)
     public void delete(@PathVariable long id){
         playlistService.delete(id);
     }
