@@ -6,6 +6,7 @@ import com.lab4.demo.book.BookController;
 import com.lab4.demo.book.model.Book;
 import com.lab4.demo.book.model.dto.BookDTO;
 import com.lab4.demo.track.model.Track;
+import com.lab4.demo.track.model.TrackDTO;
 import com.lab4.demo.user.UserController;
 import com.lab4.demo.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,9 +40,9 @@ public class TrackControllerTest extends BaseControllerTest {
 
     @Test
     void allBooks() throws Exception {
-        List<Track> tracks = new ArrayList<>();
+        List<TrackDTO> tracks = new ArrayList<>();
 
-        tracks = controller.searchTracks("ariana");
+        tracks = controller.searchTracks();
         tracks.forEach(track -> {
             System.out.println(track.getTitle());
         });
