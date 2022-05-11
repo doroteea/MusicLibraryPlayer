@@ -1,13 +1,19 @@
 package com.lab4.demo.user.model;
 
+import com.lab4.demo.playlist.model.Playlist;
+import com.lab4.demo.track.model.Track;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,4 +48,19 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
+
+    //considering each user has private playlists
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_playlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @Builder.Default
+    private List<Playlist> playlistList = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_tracks",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "track_id"))
+    @Builder.Default
+    private Set<Track> purchasedTracks = new HashSet<>();
 }

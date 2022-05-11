@@ -1,5 +1,7 @@
 package com.lab4.demo.user.dto;
 
+import com.lab4.demo.playlist.model.Playlist;
+import com.lab4.demo.track.model.Track;
 import com.lab4.demo.user.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -29,5 +32,9 @@ public class UserListDTO extends UserMinimalDTO {
     @Email(message = "Email must be valid")
     private String email;
     private Set<String> roles;
+
+    private List<Playlist> playlistList;
+
+    private List<Track> purchasedTracks;
 
 }

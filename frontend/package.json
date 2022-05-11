@@ -15,7 +15,8 @@
     "vue": "^2.6.11",
     "vue-aplayer": "^1.6.1",
     "vue-router": "^3.2.0",
-    "vuetify": "^2.4.0"
+    "vuetify": "^2.4.0",
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@mdi/font": "^5.5.55",

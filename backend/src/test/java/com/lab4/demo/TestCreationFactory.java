@@ -2,8 +2,10 @@ package com.lab4.demo;
 
 import com.lab4.demo.book.model.Book;
 import com.lab4.demo.book.model.dto.BookDTO;
+import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.user.dto.UserListDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -30,7 +32,10 @@ public class TestCreationFactory {
             supplier = TestCreationFactory::newBook;
         } else if (cls.equals(BookDTO.class)) {
             supplier = TestCreationFactory::newBookDTO;
-        } else {
+        } else if (cls.equals(Playlist.class)){
+            supplier = TestCreationFactory::newPlaylist;
+        }
+        else {
             supplier = () -> new String("You failed.");
         }
 
@@ -46,6 +51,15 @@ public class TestCreationFactory {
                 .id(randomLong())
                 .name(randomString())
                 .email(randomEmail())
+                .build();
+    }
+
+    private static Playlist newPlaylist(){
+        return Playlist.builder()
+                .id(randomLong())
+                .title(randomString())
+                .tracks(new ArrayList<>())
+                .duration(randomInt())
                 .build();
     }
 
