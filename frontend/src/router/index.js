@@ -5,6 +5,7 @@ import ItemList from "../views/ItemList.vue";
 import { auth as store } from "../store/auth.module";
 import Login from "../views/Login";
 import Tracks from "../views/Tracks";
+import Playlists from "../views/Playlists";
 
 Vue.use(VueRouter);
 
@@ -50,7 +51,18 @@ const routes = [
       }
     },
   },
-
+  {
+    path: "/playlists",
+    name: "Playlists",
+    component: Playlists,
+    beforeEnter: (to, from, next) => {
+      if (store.state.status.loggedIn) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
+  },
   {
     path: "/about",
     name: "About",

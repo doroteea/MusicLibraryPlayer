@@ -70,7 +70,7 @@
 import router from "../router";
 
 export default {
-  name: "HelloWorld",
+  name: "MusicPlayer",
 
   data: () => ({
     mode: "login",
@@ -87,7 +87,7 @@ export default {
           if (this.$store.getters["auth/isAdmin"]) {
             router.push("/users");
           } else {
-            router.push("/items");
+            router.push("/tracks");
           }
         } else {
           alert("Invalid credentials!");

@@ -12,6 +12,7 @@
       ></v-text-field>
       <v-btn @click="addUser">Add User</v-btn>
       <v-btn @click="goBooks">Go to books</v-btn>
+      <v-btn @click="goToPlaylists">My Playlists</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -55,6 +56,9 @@ export default {
   methods: {
     goBooks() {
       this.$router.push("/tracks");
+    },
+    goToPlaylists() {
+      this.$router.push("/playlists");
     },
     editUser(user) {
       this.selectedUser = user;

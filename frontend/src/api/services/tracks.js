@@ -8,6 +8,27 @@ export default {
       }
     );
   },
+  create(track) {
+    return HTTP.post(BASE_URL + "/tracks", track, {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
+  },
+  update(track) {
+    return HTTP.put(BASE_URL + "/tracks/" + track.id, track, {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
+  },
+  delete(track) {
+    return HTTP.delete(BASE_URL + "/tracks/" + track.id, {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
+  },
   filterBy(filter) {
     return HTTP.get(BASE_URL + "/tracks/filter/" + filter, {
       headers: authHeader(),

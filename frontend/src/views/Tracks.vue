@@ -11,7 +11,6 @@
         single-line
         hide-details
       ></v-text-field>
-<!--      <v-btn @click="filter">search</v-btn>-->
     </v-card-title>
     <v-data-table
       :headers="headers"
