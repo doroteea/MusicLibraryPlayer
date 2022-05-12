@@ -47,6 +47,8 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
             bookRepository.deleteAll();
             userRepository.deleteAll();
             roleRepository.deleteAll();
+            playlistRepository.deleteAll();
+            trackRepository.deleteAll();
             for (ERole value : ERole.values()) {
                 roleRepository.save(
                         Role.builder()
@@ -103,10 +105,9 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
                     .album("title album1")
                     .build());
 
-            List<Track> tracks = new ArrayList<>();
+            List<Track> tracks = trackRepository.findAll();
             playlistRepository.save(Playlist.builder()
-                    .id(1L)
-                    .title("Playlist")
+                    .title("My Playlist")
                     .tracks(tracks)
                     .duration(100)
                     .build());

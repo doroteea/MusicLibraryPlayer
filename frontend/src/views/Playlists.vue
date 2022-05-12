@@ -10,35 +10,18 @@
         single-line
         hide-details
       ></v-text-field>
-      <v-btn @click="createPlaylist">Add Playlist</v-btn>
+      <v-btn @click="addPlaylist">Add Playlist</v-btn>
     </v-card-title>
-
     <v-data-table
       :headers="headers"
       :items="playlists"
-      :single-expand="singleExpand"
-      :expanded.sync="expanded"
-      item-key="'playlist' + playlitst.tracks"
-      show-expand
-      class="elevation-1"
+      :search="search"
+      @click:row="editPlaylist"
     >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-spacer></v-spacer>
-          <v-switch
-            v-model="singleExpand"
-            label="Single expand"
-            class="mt-2"
-          ></v-switch>
-        </v-toolbar>
-      </template>
-      <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">More info about {{ item.tracks }}</td>
-      </template>
     </v-data-table>
     <PlaylistDialog
       :opened="dialogVisible"
-      :item="selectedPlaylist"
+      :playlist="selectedPlaylist"
       @refresh="refreshList"
     ></PlaylistDialog>
   </v-card>
@@ -53,8 +36,6 @@ export default {
   components: { PlaylistDialog },
   data() {
     return {
-      expanded: [],
-      singleExpand: true,
       playlists: [],
       search: "",
       headers: [
@@ -66,19 +47,22 @@ export default {
         },
         { text: "Id", value: "id" },
         { text: "Duration", value: "duration" },
-        { text: "", value: "data-table-expand" },
       ],
       dialogVisible: false,
       selectedPlaylist: {},
     };
   },
   methods: {
-    createPlaylist() {
+    addPlaylist() {
+      this.dialogVisible = true;
+    },
+    editPlaylist(playlist) {
+      this.selectedPlaylist = playlist;
       this.dialogVisible = true;
     },
     async refreshList() {
       this.dialogVisible = false;
-      this.selectedItem = {};
+      this.selectedPlaylist = {};
       this.playlists = await api.playlists.allPlaylists();
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     transition="dialog-bottom-transition"
-    max-width="600"
+    max-width="1000"
     :value="opened"
   >
     <template>
@@ -10,7 +10,24 @@
           {{ isNew ? "Create playlist" : "Edit playlist" }}
         </v-toolbar>
         <v-form>
-          <v-text-field v-model="playlist.title" label="Title" />
+          <v-card-title>
+            <v-text-field v-model="playlist.title" label="Title" />
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              @input="filterTracks"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-data-table
+              :headers="headers"
+              :items="playlist.tracks"
+              :search="search"
+            >
+            </v-data-table
+          ></v-card-title>
         </v-form>
         <v-card-actions>
           <v-btn @click="persist">
@@ -25,12 +42,33 @@
 
 <script>
 import api from "../api";
-
 export default {
   name: "PlaylistDialog",
   props: {
     playlist: Object,
     opened: Boolean,
+  },
+  data() {
+    return {
+      search: "",
+      headers: [
+        {
+          text: "Title",
+          align: "start",
+          sortable: false,
+          value: "title",
+        },
+        { text: "id", value: "id" },
+        { text: "link", value: "link" },
+        { text: "duration", value: "duration" },
+        { text: "explicit_lyrics", value: "explicit_lyrics" },
+        { text: "preview", value: "preview" },
+        { text: "artist", value: "artist" },
+        { text: "album", value: "album" },
+      ],
+      dialogVisible: false,
+      selectedPlaylist: {},
+    };
   },
   methods: {
     persist() {
@@ -38,13 +76,17 @@ export default {
         api.playlists
           .create({
             title: this.playlist.title,
+            duration: 0,
           })
-          .then(() => this.$emit("refresh"));
+          .then(() => {
+            this.$emit("refresh");
+          });
       } else {
         api.playlists
           .edit({
             id: this.playlist.id,
             title: this.playlist.title,
+            tracks: this.playlist.tracks,
           })
           .then(() => this.$emit("refresh"));
       }
@@ -58,8 +100,9 @@ export default {
     },
   },
   computed: {
+    console: () => console,
     isNew: function () {
-      return !this.playlist.id;
+      return !this.playlist.tracks && !this.playlist.id;
     },
   },
 };
