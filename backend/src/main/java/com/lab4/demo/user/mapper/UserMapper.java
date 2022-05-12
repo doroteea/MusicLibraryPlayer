@@ -34,9 +34,8 @@ public interface UserMapper {
     }
 
     @AfterMapping
-    default void populatetracks(User user, @MappingTarget UserListDTO userListDTO){
+    default void populateTracks(User user, @MappingTarget UserListDTO userListDTO){
         userListDTO.setRoles(user.getPurchasedTracks().stream().map(Track::getTitle).collect(Collectors.toSet()));
     }
-
 
 }

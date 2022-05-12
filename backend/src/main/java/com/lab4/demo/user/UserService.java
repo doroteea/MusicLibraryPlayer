@@ -49,7 +49,7 @@ public class UserService {
                 .stream().map( user ->{
                             UserListDTO userListDTO = userMapper.userListDtoFromUser(user);
                             userMapper.populateRoles(user,userListDTO);
-                            userMapper.populatetracks(user,userListDTO);
+                            userMapper.populateTracks(user,userListDTO);
                             return userListDTO;
                         }
                 ).collect(toList());
