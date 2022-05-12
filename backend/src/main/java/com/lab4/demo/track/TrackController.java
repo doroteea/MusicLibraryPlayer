@@ -10,14 +10,12 @@ import kong.unirest.json.JSONObject;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +28,15 @@ import static com.lab4.demo.UrlMapping.*;
 @RequiredArgsConstructor
 public class TrackController {
 
-    private final RequestConfig customizedRequestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.BROWSER_COMPATIBILITY).build();
-    private final HttpClientBuilder customizedClientBuilder = HttpClients.custom().setDefaultRequestConfig(customizedRequestConfig);
-    private final CloseableHttpClient client = customizedClientBuilder.build(); // customized client,
 
     private final TrackService trackService;
 
 //    public List<TrackDTO> searchTracks(String query){
 //       // query="ariana";
+//        RequestConfig customizedRequestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
+//        HttpClientBuilder customizedClientBuilder =
+//                HttpClients.custom().setDefaultRequestConfig(customizedRequestConfig);
+//        CloseableHttpClient client = customizedClientBuilder.build(); // customized client,
 //        HttpResponse<String> response = Unirest.get("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + query)
 //                .header("X-RapidAPI-Host", "deezerdevs-deezer.p.rapidapi.com")
 //                .header("X-RapidAPI-Key", "b0a6df27edmsha84d7ac00c2bd55p1f21bfjsn857a47e91b7e")
@@ -65,7 +64,7 @@ public class TrackController {
 //        }
 //        return tracks;
 //    }
-public List<TrackDTO> searchTracks(){
+public List<TrackDTO> searchTracks(String query){
     // query="ariana";
     HttpResponse<String> response = Unirest.get("https://deezerdevs-deezer.p.rapidapi.com/playlist/3155776842")
             .header("X-RapidAPI-Host", "deezerdevs-deezer.p.rapidapi.com")
@@ -98,12 +97,27 @@ public List<TrackDTO> searchTracks(){
 
     @GetMapping
     public List<TrackDTO> allTracks() {
-        return searchTracks();
+        return searchTracks("ariana");
     }
 
     @GetMapping(FIND_SEARCH_BAR)
     public List<TrackDTO> findAllByFilter(@PathVariable String filter) {
-        return searchTracks();
+        return searchTracks(filter);
+    }
+
+    @PostMapping
+    public TrackDTO createTrack(@RequestBody TrackDTO track) {
+        return trackService.create(track);
+    }
+
+    @DeleteMapping(TRACK_ID_PART)
+    public void deleteTrack(@PathVariable Long id) {
+        trackService.delete(id);
+    }
+
+    @PutMapping(TRACK_ID_PART)
+    public TrackDTO editTrack(@PathVariable Long id, @RequestBody TrackDTO track) {
+        return trackService.edit(id, track);
     }
 
 

@@ -5,20 +5,22 @@
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
-        @input="filterTracks"
         append-icon="mdi-magnify"
         label="Search"
         single-line
         hide-details
       ></v-text-field>
-<!--      <v-btn @click="filter">search</v-btn>-->
+      <!--      <v-btn @click="filter">search</v-btn>-->
+      <v-btn @click="filter">filter</v-btn>
+      <v-btn @click="playSound">play</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
       :items="tracks"
       :search="search"
+      :custom-filter="filter"
+      @click:row="playSound()"
     ></v-data-table>
-
   </v-card>
 </template>
 
@@ -63,6 +65,17 @@ export default {
     //     this.tracks = api.tracks.filterBy(this.search);
     //   }
     // },
+    filter() {
+      if (this.search !== "" && this.search.endsWith(".")) {
+        this.tracks = api.tracks.filterBy(this.search.slice(0, -1));
+      } else this.tracks = [];
+    },
+    playSound() {
+      if (this.selectedAudio) {
+        var audio = new Audio(this.tracks[0].preview);
+        audio.play();
+      }
+    },
     async refreshList() {
       this.dialogVisible = false;
       this.selectedItem = {};
