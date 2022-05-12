@@ -40,6 +40,7 @@ public class Playlist {
     private Integer duration;
 
     public void setDuration(){
+        this.duration = 0;
         for(Track track: this.tracks) {
             this.duration += track.getDuration();
         }
