@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     transition="dialog-bottom-transition"
-    max-width="1000"
+    max-width="1500"
     :value="opened"
   >
     <template>
@@ -34,9 +34,11 @@
             {{ isNew ? "Create playlist" : "Save playlist" }}
           </v-btn>
           <v-btn @click="deletePlaylist">Delete Playlist</v-btn>
+          <v-btn @click="goToTracks">Go to Tracks</v-btn>
         </v-card-actions>
       </v-card>
     </template>
+<!--    <account-info :playlist="playlist" />-->
   </v-dialog>
 </template>
 
@@ -67,7 +69,6 @@ export default {
         { text: "album", value: "album" },
       ],
       dialogVisible: false,
-      selectedPlaylist: {},
     };
   },
   methods: {
@@ -97,6 +98,9 @@ export default {
           id: this.playlist.id,
         })
         .then(() => this.$emit("refresh"));
+    },
+    goToTracks() {
+      this.$router.push("playlists/tracks/" + this.playlist.id);
     },
   },
   computed: {

@@ -1,6 +1,7 @@
 package com.lab4.demo.playlist.model.dto;
 
 import com.lab4.demo.track.model.Track;
+import com.lab4.demo.track.model.TrackDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,12 +21,12 @@ public class PlaylistDTO {
 
     private String title;
 
-    private List<Track> tracks = new ArrayList<>();
+    private List<TrackDTO> tracks = new ArrayList<>();
 
     private Integer duration;
 
     public void setDuration(){
-        for(Track track: this.tracks) {
+        for(TrackDTO track: this.tracks) {
             this.duration += track.getDuration();
         }
     }

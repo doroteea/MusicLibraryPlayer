@@ -4,6 +4,9 @@ import com.lab4.demo.BaseControllerTest;
 import com.lab4.demo.TestCreationFactory;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
+import com.lab4.demo.track.model.Track;
+import com.lab4.demo.track.model.TrackDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,6 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.lab4.demo.TestCreationFactory.randomLong;
 import static com.lab4.demo.UrlMapping.PLAYLIST;
@@ -93,5 +97,141 @@ class PlaylistControllerTest extends BaseControllerTest {
 
         ResultActions response = performDeleteWithPathVariable(PLAYLIST + PLAYLIST_ID_PART, playlist.getId());
         response.andExpect(status().isOk());
+    }
+
+    @Test
+    void addTrack() throws Exception {
+        Playlist playlist = Playlist.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        PlaylistDTO playlistDTO = PlaylistDTO.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        when(playlistService.create(playlistDTO)).thenReturn(playlistDTO);
+        PlaylistDTO playlistDTO1 = playlistService.create(playlistDTO);
+
+        TrackDTO track1 = TrackDTO.builder()
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        Track track = Track.builder()
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        playlistDTO1.getTracks().add(track1);
+
+        when(playlistService.addTrackInPlaylist(playlistDTO1.getId(),track1)).thenReturn(playlistDTO1);
+
+        ResultActions result = performPutWithRequestBodyAndPathVariables(PLAYLIST + PLAYLIST_ID_PART + "/tracks", track1, playlistDTO.getId());
+        result.andExpect(status().isOk())
+                .andExpect(jsonContentToBe(playlistDTO1));
+
+    }
+
+    @Test
+    void editTrackInPlaylist() throws Exception {
+        Playlist playlist = Playlist.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        PlaylistDTO playlistDTO = PlaylistDTO.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        when(playlistService.create(playlistDTO)).thenReturn(playlistDTO);
+
+        TrackDTO track1 = TrackDTO.builder()
+                .id(1L)
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        Track track = Track.builder()
+                .id(1L)
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+
+        when(playlistService.addTrackInPlaylist(playlistDTO.getId(),track1)).thenReturn(playlistDTO);
+        when(playlistService.editTrackInPlaylist(playlistDTO.getId(),track1)).thenReturn(playlistDTO);
+
+        ResultActions result = performPutWithRequestBodyAndPathVariables(PLAYLIST + PLAYLIST_ID_PART + "/tracks", track1, playlistDTO.getId());
+        result.andExpect(status().isOk())
+                .andExpect(jsonContentToBe(playlistDTO));
+
+    }
+
+    @Test
+    void deleteTrackInPlaylist() throws Exception {
+        Playlist playlist = Playlist.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        PlaylistDTO playlistDTO = PlaylistDTO.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        when(playlistService.create(playlistDTO)).thenReturn(playlistDTO);
+
+        TrackDTO track1 = TrackDTO.builder()
+                .id(1L)
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        Track track = Track.builder()
+                .id(1L)
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        when(playlistService.addTrackInPlaylist(playlistDTO.getId(),track1)).thenReturn(playlistDTO);
+        when(playlistService.deleteTrackFromPlaylist(playlistDTO.getId(),track.getId())).thenReturn(playlistDTO);
+
+        ResultActions result = performPutWithRequestBodyAndPathVariables(PLAYLIST + PLAYLIST_ID_PART + "/tracks", track1, playlistDTO.getId());
+        result.andExpect(status().isOk())
+                .andExpect(jsonContentToBe(playlistDTO));
+
     }
 }

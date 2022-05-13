@@ -26,7 +26,7 @@ public class TrackService {
                 .collect(Collectors.toList());
     }
 
-    private Track getTrackById(Long id) {
+    public Track getTrackById(Long id) {
         return trackRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Track not found with id: " + id));
