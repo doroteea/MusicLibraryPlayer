@@ -24,6 +24,7 @@
       :playlist="selectedPlaylist"
       @refresh="refreshList"
     ></PlaylistDialog>
+<!--        <account-info :playlist="selectedPlaylist" />-->
   </v-card>
 </template>
 
