@@ -87,11 +87,7 @@ export default {
           if (this.$store.getters["auth/isAdmin"]) {
             router.push("/users");
           } else {
-<<<<<<< HEAD
-            router.push("/playlists");///modiffff
-=======
             router.push("/tracks");
->>>>>>> df4adf84a4661dd3b3178057f391bc873ed956c1
           }
         } else {
           alert("Invalid credentials!");

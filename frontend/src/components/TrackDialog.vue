@@ -13,14 +13,10 @@
           <v-text-field v-model="track.title" label="Title" />
           <v-text-field v-model="track.link" label="Link" />
           <v-text-field v-model="track.duration" label="Duration" />
-<<<<<<< HEAD
           <v-text-field
             v-model="track.explicit_lyrics"
             label="Explicit Lyrics"
           />
-=======
-          <v-text-field v-model="track.explicit_lyrics" label="Explicit Lyrics" />
->>>>>>> df4adf84a4661dd3b3178057f391bc873ed956c1
           <v-text-field v-model="track.preview" label="Preview" />
           <v-text-field v-model="track.artist" label="Artist" />
           <v-text-field v-model="track.album" label="Album" />

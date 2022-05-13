@@ -16,6 +16,7 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
+      yarn
       :items="tracks"
       :search="search"
       :custom-filter="filter"
