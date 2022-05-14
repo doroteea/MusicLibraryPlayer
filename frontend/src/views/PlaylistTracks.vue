@@ -26,8 +26,8 @@ import api from "../api";
 
 export default {
   name: "PlaylistTracks",
-  props:{
-    playlist: Object
+  props: {
+    playlist: Object,
   },
   data() {
     return {

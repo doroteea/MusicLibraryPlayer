@@ -25,9 +25,10 @@
               :headers="headers"
               :items="playlist.tracks"
               :search="search"
+              @click:row="sing"
             >
-            </v-data-table
-          ></v-card-title>
+            </v-data-table>
+          </v-card-title>
         </v-form>
         <v-card-actions>
           <v-btn @click="persist">
@@ -38,18 +39,19 @@
         </v-card-actions>
       </v-card>
     </template>
-<!--    <account-info :playlist="playlist" />-->
   </v-dialog>
 </template>
 
 <script>
 import api from "../api";
+
 export default {
   name: "PlaylistDialog",
   props: {
     playlist: Object,
     opened: Boolean,
   },
+  audio: {},
   data() {
     return {
       search: "",
@@ -68,7 +70,6 @@ export default {
         { text: "artist", value: "artist" },
         { text: "album", value: "album" },
       ],
-      dialogVisible: false,
     };
   },
   methods: {
@@ -100,7 +101,14 @@ export default {
         .then(() => this.$emit("refresh"));
     },
     goToTracks() {
-      this.$router.push("playlists/tracks/" + this.playlist.id);
+      this.$router.push("/tracks");
+    },
+    sing(track) {
+      if (this.audio) {
+        this.audio.pause();
+      }
+      this.audio = new Audio(track.preview);
+      this.audio.play();
     },
   },
   computed: {

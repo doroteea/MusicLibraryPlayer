@@ -34,9 +34,6 @@ public class Track {
     @Column(length = 512, nullable = false)
     private String preview;
 
-    //private Artist artist;
-    //private Album album;
-
     @Column(length = 512, nullable = false)
     private String artist;
 

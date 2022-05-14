@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      Tracks
+      TracksAPI
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -10,8 +10,6 @@
         single-line
         hide-details
       ></v-text-field>
-      <v-btn @click="addTrack">Add Track</v-btn>
-      <v-btn @click="filter">filter</v-btn>
       <v-btn @click="goToPlaylists">Go To Playlists</v-btn>
     </v-card-title>
     <v-data-table
@@ -20,23 +18,22 @@
       :items="tracks"
       :search="search"
       :custom-filter="filter"
-      @click:row="editTrack"
+      @click:row="addToPlaylist"
     ></v-data-table>
-    <TrackDialog
+    <TracksApiDialog
       :opened="dialogVisible"
       :track="selectedTrack"
       @refresh="refreshList"
-    ></TrackDialog>
+    ></TracksApiDialog>
   </v-card>
 </template>
 
 <script>
 import api from "../api";
-import TrackDialog from "../components/TrackDialog";
-
+import TracksApiDialog from "../components/TracksApiDialog";
 export default {
   name: "Track",
-  components: { TrackDialog },
+  components: { TracksApiDialog },
   audio: {},
   data() {
     return {
@@ -62,20 +59,10 @@ export default {
     };
   },
   methods: {
-    filter() {
-      if (this.search !== "" && this.search.endsWith(".")) {
-        this.tracks = api.tracks.filterBy(this.search.slice(0, -1));
-      } else this.tracks = [];
-    },
     async refreshList() {
-      this.dialogVisible = false;
-      this.selectedTrack = {};
-      this.tracks = await api.tracks.allTracks();
+      this.tracks = await api.tracksApi.allTracks();
     },
-    addTrack() {
-      this.dialogVisible = true;
-    },
-    editTrack(track) {
+    addToPlaylist(track) {
       if (this.audio) {
         this.audio.pause();
       }

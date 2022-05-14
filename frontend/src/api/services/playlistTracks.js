@@ -27,7 +27,7 @@ export default {
     });
   },
   delete() {
-    return HTTP.delete(BASE_URL + "/playlists/{id}/tracks1" , {
+    return HTTP.delete(BASE_URL + "/playlists/{id}/tracks1", {
       headers: authHeader(),
     }).then((response) => {
       return response.data;

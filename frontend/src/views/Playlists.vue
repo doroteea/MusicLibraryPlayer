@@ -11,6 +11,7 @@
         hide-details
       ></v-text-field>
       <v-btn @click="addPlaylist">Add Playlist</v-btn>
+      <v-btn @click="goToApi">Tracks Api</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -24,7 +25,6 @@
       :playlist="selectedPlaylist"
       @refresh="refreshList"
     ></PlaylistDialog>
-<!--        <account-info :playlist="selectedPlaylist" />-->
   </v-card>
 </template>
 
@@ -65,6 +65,9 @@ export default {
       this.dialogVisible = false;
       this.selectedPlaylist = {};
       this.playlists = await api.playlists.allPlaylists();
+    },
+    goToApi() {
+      this.$router.push("/tracksAPI");
     },
   },
   created() {

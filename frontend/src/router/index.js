@@ -7,7 +7,7 @@ import Login from "../views/Login";
 import Tracks from "../views/Tracks";
 import Playlists from "../views/Playlists";
 import PlaylistTracks from "../views/PlaylistTracks";
-
+import TracksAPI from "../views/TracksAPI";
 Vue.use(VueRouter);
 
 const routes = [
@@ -60,7 +60,19 @@ const routes = [
       if (store.state.status.loggedIn) {
         next();
       } else {
-        next({name: "Home"});
+        next({ name: "Home" });
+      }
+    },
+  },
+  {
+    path: "/tracksAPI",
+    name: "TracksAPI",
+    component: TracksAPI,
+    beforeEnter: (to, from, next) => {
+      if (store.state.status.loggedIn) {
+        next();
+      } else {
+        next({ name: "Home" });
       }
     },
   },
