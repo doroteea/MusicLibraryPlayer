@@ -8,6 +8,9 @@ import Tracks from "../views/Tracks";
 import Playlists from "../views/Playlists";
 import PlaylistTracks from "../views/PlaylistTracks";
 import TracksAPI from "../views/TracksAPI";
+import Payment from "../views/Payment";
+import PaymentSuccess from "../views/PaymentSuccess";
+import PaymentFail from "../views/PaymentFail";
 Vue.use(VueRouter);
 
 const routes = [
@@ -87,6 +90,28 @@ const routes = [
         next({ name: "Home" });
       }
     },
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    component: Payment,
+    beforeEnter: (to, from, next) => {
+      if (store.state.status.loggedIn) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
+  },
+  {
+    path: "/payment/success",
+    name: "PaymentSuccess",
+    component: PaymentSuccess,
+  },
+  {
+    path: "/payment/fail",
+    name: "PaymentFail",
+    component: PaymentFail,
   },
   {
     path: "/about",

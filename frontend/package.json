@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@cycjimmy/vue-h5-audio-controls": "^1.1.0",
+    "@stripe/stripe-js": "^1.29.0",
+    "@vue-stripe/vue-stripe": "^4.4.2",
     "axios": "0.18.1",
     "core-js": "^3.6.5",
     "material-design-icons-iconfont": "5.0.1",

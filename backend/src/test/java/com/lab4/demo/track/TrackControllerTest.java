@@ -43,26 +43,26 @@ public class TrackControllerTest extends BaseControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    @Test
-    void allTracks() throws Exception {
-        List<TrackDTO> tracks;
-
-        tracks = controller.searchTracks("eminem");
-        tracks.forEach(track -> {
-            System.out.println(track.getTitle());
-        });
-
-    }
-
-    @Test
-    void filterBY(){
-        List<TrackDTO> tracks;
-
-        tracks = controller.findAllByFilter("eminem");
-        tracks.forEach(track -> {
-            System.out.println(track.getTitle());
-        });
-    }
+//    @Test
+//    void allTracks() throws Exception {
+//        List<TrackDTO> tracks;
+//
+//        tracks = controller.searchTracks("eminem");
+//        tracks.forEach(track -> {
+//            System.out.println(track.getTitle());
+//        });
+//
+//    }
+//
+//    @Test
+//    void filterBY(){
+//        List<TrackDTO> tracks;
+//
+//        tracks = controller.findAllByFilter("eminem");
+//        tracks.forEach(track -> {
+//            System.out.println(track.getTitle());
+//        });
+//    }
 
     @Test
     void create() throws Exception {

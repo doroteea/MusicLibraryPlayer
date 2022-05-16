@@ -25,4 +25,9 @@ public class UrlMapping {
 
     public static final String FIND_SEARCH_BAR ="/filter/{filter}";
 
+    //PaymentDTO
+    public static final String PAYMENT = API_PATH + "/payment";
+    public static final String CHECKOUT = "/checkout";
+    public static final String FAIL_PAYMENT = "http://localhost:8091"+"/payment/fail";
+    public static final String SUCCESS_PAYMENT = "http://localhost:8091"+"payment/success";
 }

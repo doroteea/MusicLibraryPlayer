@@ -2,6 +2,7 @@ package com.lab4.demo.track;
 
 
 import com.lab4.demo.book.model.Book;
+import com.lab4.demo.playlist.PlaylistRepository;
 import com.lab4.demo.track.model.Track;
 import com.lab4.demo.track.model.TrackDTO;
 import org.junit.jupiter.api.Assertions;
@@ -28,10 +29,13 @@ class TrackServiceTest {
     @Mock
     private TrackMapper trackMapper;
 
+    @Mock
+    private PlaylistRepository playlistRepository;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        trackService = new TrackService(trackRepository, trackMapper);
+        trackService = new TrackService(playlistRepository,trackRepository, trackMapper);
     }
 
     @Test

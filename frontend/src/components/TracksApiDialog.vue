@@ -11,6 +11,7 @@
         </v-form>
         <v-card-actions>
           <v-btn @click="addToPlaylist">Add to playlist</v-btn>
+          <v-btn @click="buy">Buy</v-btn>
         </v-card-actions>
       </v-card>
     </template>
@@ -39,6 +40,9 @@ export default {
           album: this.track.album,
         })
         .then(() => this.$emit("refresh"));
+    },
+    buy() {
+      this.$router.push("/payment");
     },
   },
 };

@@ -45,19 +45,4 @@ public class PlaylistController {
 //        return playlistService.getPlaylist(id);
 //    }
 
-    @PutMapping(PLAYLIST_ID_PART + "/tracks")
-    public PlaylistDTO createTrack(@PathVariable Long id, @RequestBody TrackDTO track) {
-        return playlistService.addTrackInPlaylist(id,track);
-    }
-
-    @PutMapping(PLAYLIST_ID_PART + "/tracks" + TRACK_ID_PART)
-    public PlaylistDTO updateTrack(@PathVariable Long id, @RequestBody TrackDTO track) {
-        return playlistService.addTrackInPlaylist(id,track);
-    }
-
-    @PutMapping(PLAYLIST_ID_PART + "/tracks1")
-    public void deleteTrack(@PathVariable Long id,@RequestBody TrackDTO track) {
-        playlistService.deleteTrackFromPlaylist(id,track.getId());
-    }
-
 }
