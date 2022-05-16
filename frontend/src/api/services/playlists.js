@@ -29,4 +29,37 @@ export default {
       return response.data;
     });
   },
+  createTrack(playlist, track) {
+    return HTTP.post(
+      BASE_URL + "/playlists/" + playlist.id + "/tracks",
+      track,
+      {
+        headers: authHeader(),
+      }
+    ).then((response) => {
+      return response.data;
+    });
+  },
+  editTrack(playlist, track) {
+    return HTTP.put(
+      BASE_URL + "/playlists/" + playlist.id + "/tracks/" + track.id,
+      track,
+      {
+        headers: authHeader(),
+      }
+    ).then((response) => {
+      return response.data;
+    });
+  },
+  deleteTrack(playlist, track) {
+    return HTTP.delete(
+      BASE_URL + "/playlists/" + playlist.id + "/tracks1",
+      track,
+      {
+        headers: authHeader(),
+      }
+    ).then((response) => {
+      return response.data;
+    });
+  },
 };
