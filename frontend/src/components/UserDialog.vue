@@ -20,6 +20,11 @@
           </v-btn>
           <v-btn @click="deleteUser">Delete user</v-btn>
         </v-card-actions>
+        <v-spacer></v-spacer>
+        <v-data-table :headers="headers" :items="user.tracks"> </v-data-table>
+        <v-spacer></v-spacer>
+        <v-data-table :headers="headers2" :items="user.playlists">
+        </v-data-table>
       </v-card>
     </template>
   </v-dialog>
@@ -33,6 +38,37 @@ export default {
   props: {
     user: Object,
     opened: Boolean,
+  },
+  audio: {},
+  data() {
+    return {
+      search: "",
+      headers: [
+        {
+          text: "Title",
+          align: "start",
+          sortable: false,
+          value: "title",
+        },
+        { text: "id", value: "id" },
+        { text: "link", value: "link" },
+        { text: "duration", value: "duration" },
+        { text: "explicit_lyrics", value: "explicit_lyrics" },
+        { text: "preview", value: "preview" },
+        { text: "artist", value: "artist" },
+        { text: "album", value: "album" },
+      ],
+      headers2: [
+        {
+          text: "Title",
+          align: "start",
+          sortable: false,
+          value: "title",
+        },
+        { text: "Id", value: "id" },
+        { text: "Duration", value: "duration" },
+      ],
+    };
   },
   methods: {
     persist() {

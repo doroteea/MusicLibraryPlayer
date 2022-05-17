@@ -15,4 +15,11 @@ export default {
       return response.data;
     });
   },
+  purchaseTrack(track) {
+    return HTTP.put(BASE_URL + "/tracksAPI/purchase/" + track.id, track, {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
+  },
 };

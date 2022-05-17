@@ -1,20 +1,22 @@
 package com.lab4.demo.user;
 
+import com.lab4.demo.playlist.model.dto.PlaylistDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.dto.UserListDTO;
 import com.lab4.demo.user.dto.UserMinimalDTO;
 import com.lab4.demo.user.model.User;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
 class UserServiceIntegrationTest {
@@ -90,4 +92,51 @@ class UserServiceIntegrationTest {
         assertEquals(0, userRepository.findAll().size());
     }
 
+    @Test
+    void buyTrack() throws UserNotFoundException {
+        TrackDTO track = TrackDTO.builder()
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        UserListDTO user = userService.createUser(
+                UserListDTO.builder()
+                .id(1L)
+                .name("User")
+                .password("password")
+                .email("email@yahoo.com")
+                .purchasedTracks(new ArrayList<>())
+                .build());
+        UserListDTO userListDTO = userService.buyTrack(user.getId(),track);
+
+        assertEquals(track.getTitle(),userListDTO.getPurchasedTracks().get(0).getTitle());
+    }
+
+    @Test
+    void createPlaylist() throws UserNotFoundException {
+        PlaylistDTO playlistDTO = PlaylistDTO.builder()
+                .id(1L)
+                .title("Playlist 2")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+
+        UserListDTO user = userService.createUser(
+                UserListDTO.builder()
+                        .id(1L)
+                        .name("User")
+                        .password("password")
+                        .email("email@yahoo.com")
+                        .purchasedTracks(new ArrayList<>())
+                        .playlistList(new ArrayList<>())
+                        .build());
+
+        UserListDTO userListDTO = userService.createPlaylist(user.getId(),playlistDTO);
+
+        assertEquals(playlistDTO.getTitle(),userListDTO.getPlaylistList().get(0).getTitle());
+    }
 }

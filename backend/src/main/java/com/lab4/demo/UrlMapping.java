@@ -5,9 +5,11 @@ public class UrlMapping {
     public static final String TRACKS = API_PATH+"/tracks";
     public static final String API_TRACKS = API_PATH+"/tracksAPI";
     public static final String TRACK_ID_PART = "/{id}";
+    public static final String BUY_TRACK = "/purchase/{id}";
 
     public static final String PLAYLIST = API_PATH + "/playlists";
     public static final String PLAYLIST_ID_PART = "/{id}" ;
+    public static final String ADD_PLAYLIST = "/create" + PLAYLIST_ID_PART ;
 
     public static final String BOOKS = API_PATH + "/items";
 
@@ -25,4 +27,8 @@ public class UrlMapping {
 
     public static final String FIND_SEARCH_BAR ="/filter/{filter}";
 
+    //PaymentDTO
+    public static final String PAYMENT = API_PATH + "/payment";
+    public static final String FAIL_PAYMENT = "http://localhost:8091"+"/payment/fail";
+    public static final String SUCCESS_PAYMENT = "http://localhost:8091"+"payment/success";
 }

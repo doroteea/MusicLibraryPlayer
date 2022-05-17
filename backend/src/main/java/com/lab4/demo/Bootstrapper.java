@@ -68,22 +68,6 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
                     .password("WooHoo1!")
                     .roles(Set.of("EMPLOYEE"))
                     .build());
-            bookRepository.save(Book.builder()
-                    .id(1L)
-                    .title("The Lord of the Rings")
-                    .author("J.R.R. Tolkien")
-                    .genre("Fantasy")
-                    .price(19.99)
-                    .quantity(10)
-                    .build());
-            bookRepository.save(Book.builder()
-                    .id(1L)
-                    .title("The Lady of the Rings")
-                    .author("J.R.R. Tolkien")
-                    .genre("Fantasy")
-                    .price(19.00)
-                    .quantity(0)
-                    .build());
 
             trackRepository.save(Track.builder()
                     .title("title song1")

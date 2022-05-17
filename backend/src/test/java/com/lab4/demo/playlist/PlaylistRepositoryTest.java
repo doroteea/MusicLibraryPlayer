@@ -2,6 +2,7 @@ package com.lab4.demo.playlist;
 
 import com.lab4.demo.TestCreationFactory;
 import com.lab4.demo.playlist.model.Playlist;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +27,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    public void testMock() {
+    void testMock() {
         Playlist playlist = playlistRepository.save(Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
@@ -39,7 +41,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         List<Playlist> playlists = TestCreationFactory.listOf(Playlist.class);
         playlistRepository.saveAll(playlists);
         List<Playlist> all = playlistRepository.findAll();
@@ -47,7 +49,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    public void create(){
+    void create(){
         Playlist playlist = Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
@@ -59,7 +61,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    public void update() {
+    void update() {
         Playlist playlist = Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
@@ -73,7 +75,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    public void delete() {
+    void delete() {
         Playlist playlist = Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
@@ -82,5 +84,24 @@ class PlaylistRepositoryTest {
         playlistRepository.save(playlist);
         playlistRepository.delete(playlist);
         assertEquals(0, playlistRepository.findAll().size());
+    }
+
+    @Test
+    void findByTitle(){
+        Playlist playlist = Playlist.builder()
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        playlistRepository.save(playlist);
+
+        Optional<Playlist> playlist1 = playlistRepository.findByTitle("Playlist");
+
+        assertTrue(playlist1.isPresent());
+        Assertions.assertEquals(playlist.getTitle(),playlist1.get().getTitle());
+
+        playlist1 = playlistRepository.findByTitle("Play");
+
+        assertFalse(playlist1.isPresent());
     }
 }

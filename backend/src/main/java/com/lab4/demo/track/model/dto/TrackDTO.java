@@ -1,4 +1,4 @@
-package com.lab4.demo.track.model;
+package com.lab4.demo.track.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,8 +16,6 @@ public class TrackDTO {
     private int duration;
     private Boolean explicit_lyrics;
     private String preview;
-    //private Artist artist;
-    //private Album album;
     private String artist;
     private String album;
 }

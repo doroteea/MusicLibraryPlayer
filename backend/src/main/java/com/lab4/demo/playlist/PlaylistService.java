@@ -5,19 +5,20 @@ import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.TrackMapper;
 import com.lab4.demo.track.TrackService;
 import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
+import com.lab4.demo.user.UserRepository;
+import com.lab4.demo.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PlaylistService {
-
+    private final UserRepository userRepository;
     private final PlaylistRepository playlistRepository;
     private final PlaylistMapper playlistMapper;
     private final TrackService trackService;
@@ -53,53 +54,33 @@ public class PlaylistService {
     }
 
     public void delete(Long id) {
+        List<User> users = userRepository.findAll();
+        for(User user:users){
+            List<Playlist> playlists = new ArrayList<>();
+            for(Playlist playlist: user.getPlaylistList()){
+                if(!playlist.getId().equals(id)){
+                    playlists.add(playlist);
+                }
+            }
+            user.setPlaylistList(playlists);
+            userRepository.save(user);
+        }
         playlistRepository.deleteById(id);
-    }
-
-    public List<TrackDTO> viewTracksFromPlaylist(Long playlist_id){
-        Playlist actPlaylist = findById(playlist_id);
-        return actPlaylist.
-                getTracks()
-                .stream()
-                .map(trackMapper::toDto)
-                .collect(Collectors.toList());
-
     }
 
     public PlaylistDTO addTrackInPlaylist(Long playlist_id,TrackDTO trackDTO){
         Playlist actPlaylist = findById(playlist_id);
-        TrackDTO trackDTO1 = trackService.create(trackDTO);
-        actPlaylist.getTracks().add(trackMapper.fromDto(trackDTO1));
-        return playlistMapper.toDTO(playlistRepository.save(actPlaylist));
-    }
-
-    public PlaylistDTO editTrackInPlaylist(Long playlist_id,TrackDTO trackDTO){
-        Playlist actPlaylist = findById(playlist_id);
-        trackService.edit(trackDTO.getId(),trackDTO);
-        actPlaylist.setDuration();
-        return playlistMapper.toDTO(playlistRepository.save(actPlaylist));
-    }
-
-    public PlaylistDTO deleteTrackFromPlaylist(Long playlist_id,Long track_id){
-        Playlist actPlaylist = findById(playlist_id);
-        List<Track> actPlaylistTracks = actPlaylist.getTracks();
-        int id = 0;
-        for (Track track: actPlaylistTracks){
-            if(track.getId().equals(track_id)){
-                break;
-            }
-            id++;
+        Optional<Track> track = trackService.findByTitle(trackDTO.getTitle());
+        if(track.isEmpty()) {
+            TrackDTO trackDTO1 = trackService.create(trackDTO);
+            actPlaylist.getTracks().add(trackMapper.fromDto(trackDTO1));
         }
-        actPlaylist.getTracks().remove(id);
-        trackService.delete(track_id);
-        return playlistMapper.toDTO(
-                playlistRepository.save(actPlaylist)
-        );
+        else{
+            actPlaylist.getTracks().add(track.get());
+        }
+        if(actPlaylist != null){
+            actPlaylist.setDuration();
+        }
+        return playlistMapper.toDTO(playlistRepository.save(actPlaylist));
     }
-
-    public PlaylistDTO getPlaylist(Long id){
-        return playlistMapper.toDTO(findById(id));
-    }
-
-
 }

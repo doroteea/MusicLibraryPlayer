@@ -11,15 +11,12 @@
         hide-details
       ></v-text-field>
       <v-btn @click="addTrack">Add Track</v-btn>
-      <v-btn @click="filter">filter</v-btn>
-      <v-btn @click="goToPlaylists">Go To Playlists</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
       yarn
       :items="tracks"
       :search="search"
-      :custom-filter="filter"
       @click:row="editTrack"
     ></v-data-table>
     <TrackDialog
@@ -62,11 +59,6 @@ export default {
     };
   },
   methods: {
-    filter() {
-      if (this.search !== "" && this.search.endsWith(".")) {
-        this.tracks = api.tracks.filterBy(this.search.slice(0, -1));
-      } else this.tracks = [];
-    },
     async refreshList() {
       this.dialogVisible = false;
       this.selectedTrack = {};
@@ -83,9 +75,6 @@ export default {
       this.selectedTrack = track;
       this.audio = new Audio(this.selectedTrack.preview);
       this.audio.play();
-    },
-    goToPlaylists() {
-      this.$router.push("/playlists");
     },
   },
   created() {

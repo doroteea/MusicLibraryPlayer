@@ -1,7 +1,9 @@
 package com.lab4.demo.user.dto;
 
 import com.lab4.demo.playlist.model.Playlist;
+import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.model.Track;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +35,8 @@ public class UserListDTO extends UserMinimalDTO {
     private String email;
     private Set<String> roles;
 
-    private List<Playlist> playlistList;
+    private List<PlaylistDTO> playlistList;
 
-    private List<Track> purchasedTracks;
+    private List<TrackDTO> purchasedTracks;
 
 }

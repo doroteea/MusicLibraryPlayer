@@ -3,6 +3,8 @@ package com.lab4.demo;
 import com.lab4.demo.book.model.Book;
 import com.lab4.demo.book.model.dto.BookDTO;
 import com.lab4.demo.playlist.model.Playlist;
+import com.lab4.demo.track.model.Track;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.dto.UserListDTO;
 
 import java.util.ArrayList;
@@ -34,6 +36,10 @@ public class TestCreationFactory {
             supplier = TestCreationFactory::newBookDTO;
         } else if (cls.equals(Playlist.class)){
             supplier = TestCreationFactory::newPlaylist;
+        } else if (cls.equals(Track.class)){
+            supplier = TestCreationFactory::newTrack;
+        } else if (cls.equals(TrackDTO .class)){
+            supplier = TestCreationFactory::newTrackDTO;
         }
         else {
             supplier = () -> new String("You failed.");
@@ -60,6 +66,32 @@ public class TestCreationFactory {
                 .title(randomString())
                 .tracks(new ArrayList<>())
                 .duration(randomInt())
+                .build();
+    }
+
+    private static Track newTrack(){
+        return Track.builder()
+                .id(randomLong())
+                .album(randomString())
+                .artist(randomString())
+                .duration(randomInt())
+                .explicit_lyrics(randomBoolean())
+                .link(randomString())
+                .preview(randomString())
+                .title(randomString())
+                .build();
+    }
+
+    private static TrackDTO newTrackDTO(){
+        return TrackDTO.builder()
+                .id(randomLong())
+                .album(randomString())
+                .artist(randomString())
+                .duration(randomInt())
+                .explicit_lyrics(randomBoolean())
+                .link(randomString())
+                .preview(randomString())
+                .title(randomString())
                 .build();
     }
 
