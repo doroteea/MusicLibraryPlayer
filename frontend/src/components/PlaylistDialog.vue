@@ -11,6 +11,7 @@
         </v-toolbar>
         <v-form>
           <v-card-title>
+            <v-text-field v-model="playlist.id" label="User id" />
             <v-text-field v-model="playlist.title" label="Title" />
             <v-spacer></v-spacer>
             <v-text-field
@@ -32,8 +33,9 @@
         </v-form>
         <v-card-actions>
           <v-btn @click="persist">
-            {{ isNew ? "Create playlist" : "Save playlist" }}
+            {{ isNew ? "Edit playlist" : "Save playlist" }}
           </v-btn>
+          <v-btn @click="addPlaylist">Add Playlist</v-btn>
           <v-btn @click="deletePlaylist">Delete Playlist</v-btn>
           <v-btn @click="goToTracks">Go to Tracks</v-btn>
         </v-card-actions>
@@ -77,6 +79,7 @@ export default {
       if (this.isNew) {
         api.playlists
           .create({
+            id: this.playlist.id,
             title: this.playlist.title,
             duration: 0,
           })
@@ -92,6 +95,17 @@ export default {
           })
           .then(() => this.$emit("refresh"));
       }
+    },
+    addPlaylist() {
+      api.playlists
+        .create({
+          id: this.playlist.id,
+          title: this.playlist.title,
+          duration: 0,
+        })
+        .then(() => {
+          this.$emit("refresh");
+        });
     },
     deletePlaylist() {
       api.playlists

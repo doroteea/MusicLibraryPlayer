@@ -41,11 +41,6 @@ class PaymentControllerTest extends BaseControllerTest {
                 .user_id(1L)
                 .build();
 
-        CreatePayment createPayment = new CreatePayment();
-
-        //paymentService.createSession(paymentDTO);
         paymentController.checkout(paymentDTO);
-//        ResultActions result = performPostWithRequestBody(PAYMENT + CHECKOUT, createPayment);
-//        result.andExpect(status().isOk());
     }
 }

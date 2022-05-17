@@ -9,7 +9,7 @@ export default {
     );
   },
   create(playlist) {
-    return HTTP.post(BASE_URL + "/playlists", playlist, {
+    return HTTP.put(BASE_URL + "/playlists/create/" + playlist.id, playlist, {
       headers: authHeader(),
     }).then((response) => {
       return response.data;

@@ -5,16 +5,12 @@
       <span class="sr-only">Payment successful...</span>
     </div>
     <div>
-      <v-btn class="sr-only" @click="processOrder">Finish</v-btn>
+      <v-btn class="sr-only" @click="goBack">Finish</v-btn>
     </div>
   </div>
 </template>
 
 <script>
-// import api from "../../api";
-// import router from "../../router";
-import { BASE_URL } from "../api/http";
-
 export default {
   name: "Success",
   props: ["baseURL"],
@@ -26,18 +22,8 @@ export default {
     };
   },
   methods: {
-    async refreshList() {
-      await this.$http
-        .get(BASE_URL + "/payment/" + this.$store.getters["auth/userId"])
-        .then((response) => {
-          if (response.status === 200) {
-            let products = response.data;
-            console.log(products);
-            this.payment.id = products.id;
-            console.log("refresh");
-            console.log(this.payment);
-          }
-        });
+    goBack() {
+      this.$router.push("/tracksApi");
     },
   },
   created() {

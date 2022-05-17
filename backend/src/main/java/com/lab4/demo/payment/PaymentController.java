@@ -29,35 +29,5 @@ public class PaymentController {
     @PostMapping
     public void checkout(@RequestBody PaymentDTO paymentDTO) throws StripeException {
         paymentService.createSession(paymentDTO);
-//        System.out.println(session.getId());
-
-//        response.redirect(session.getUrl(), 303);
-//        Session session = paymentService.createSession(paymentDTO);
-//        System.out.println(session.getId());
-//        PaymentResponse paymentResponse = PaymentResponse.builder()
-//                .sessionId(session.getId())
-//                .build();
-//        return new ResponseEntity<PaymentResponse>(paymentResponse, HttpStatus.OK);
     }
-
-//    @PostMapping(CHECKOUT)
-//    public CreatePaymentResponse createPayment(@RequestBody CreatePayment createPayment) throws StripeException {
-//        Stripe.apiKey = "sk_test_51KzStYBeCTO9xhNTcPx39YpKDBG9dKcAdb9FOec7lkJr7AuRmfTg2OsUujZoKglyvC1NDuVCnGbcjrSAlufSuK1l00F7OrmT96";
-//
-//        PaymentIntentCreateParams params =
-//                    PaymentIntentCreateParams.builder()
-//                            .setAmount(200L)
-//                            .setCurrency("eur")
-//                            .build();
-//
-//            // Create a PaymentIntent with the order amount and currency
-//            PaymentIntent paymentIntent = PaymentIntent.create(params);
-//
-//            return new CreatePaymentResponse(paymentIntent.getClientSecret());
-//
-//    }
-//
-
-
-
 }

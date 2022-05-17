@@ -78,7 +78,7 @@ export default {
         },
       ],
       successURL: "http://localhost:8091/#/payment/success",
-      cancelURL: "https://vuestripe.com/stripe-checkout/one-time-payment/",
+      cancelURL: "http://localhost:8091/#/payment/fail",
       dialogVisible: false,
       selectedRecipe: {},
     };

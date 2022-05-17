@@ -4,6 +4,9 @@ import com.lab4.demo.playlist.PlaylistService;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.model.Track;
 import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.user.UserNotFoundException;
+import com.lab4.demo.user.UserService;
+import com.lab4.demo.user.dto.UserListDTO;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
@@ -25,6 +28,8 @@ public class TrackApiController {
 
     private final TrackService trackService;
     private final PlaylistService playlistService;
+    private final UserService userService;
+
     public List<TrackDTO> searchTracks(String query){
         // query="ariana";
         HttpResponse<String> response = Unirest.get("https://deezerdevs-deezer.p.rapidapi.com/playlist/3155776842")
@@ -61,7 +66,6 @@ public class TrackApiController {
         return searchTracks("ariana");
     }
 
-
     @GetMapping(FIND_SEARCH_BAR)
     public List<TrackDTO> findAllByFilter(@PathVariable String filter) {
         return searchTracks(filter);
@@ -70,6 +74,11 @@ public class TrackApiController {
     @PutMapping(PLAYLIST_ID_PART)
     public PlaylistDTO addToPlaylist(@PathVariable Long id, @RequestBody TrackDTO track){
         return playlistService.addTrackInPlaylist(id,track);
+    }
+
+    @PutMapping("/purchase/{id}")
+    public UserListDTO purchase(@PathVariable Long id, @RequestBody TrackDTO track) throws UserNotFoundException {
+        return userService.buyTrack(id,track);
     }
 
 }

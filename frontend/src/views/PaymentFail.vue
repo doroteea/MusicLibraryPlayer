@@ -10,6 +10,11 @@
 <script>
 export default {
   name: "Failure",
+  methods: {
+    goBack() {
+      this.$router.push("/tracksApi");
+    },
+  },
   mounted() {
     localStorage.removeItem("sessionId");
     window.location.href = "/tracksAPI";

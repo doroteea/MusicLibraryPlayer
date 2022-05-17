@@ -10,6 +10,7 @@ import com.lab4.demo.security.dto.MessageResponse;
 import com.lab4.demo.track.model.Track;
 import com.lab4.demo.track.model.TrackDTO;
 import com.lab4.demo.user.UserController;
+import com.lab4.demo.user.UserNotFoundException;
 import com.lab4.demo.user.UserService;
 import com.lab4.demo.user.dto.UserListDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +36,9 @@ public class TrackControllerTest extends BaseControllerTest {
 
     @Mock
     private TrackService trackService;
+
+    @Mock
+    private UserService userService;
 
     @BeforeEach
     protected void setUp() {

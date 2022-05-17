@@ -1,9 +1,11 @@
 package com.lab4.demo.user;
 
 import com.lab4.demo.playlist.PlaylistMapper;
+import com.lab4.demo.playlist.PlaylistService;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.TrackMapper;
+import com.lab4.demo.track.TrackService;
 import com.lab4.demo.track.model.Track;
 import com.lab4.demo.track.model.TrackDTO;
 import com.lab4.demo.user.dto.UserListDTO;
@@ -16,10 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,8 +30,10 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final TrackService trackService;
     private final TrackMapper trackMapper;
     private final PlaylistMapper playlistMapper;
+    private final PlaylistService playlistService;
 
     public User findById(Long id) throws UserNotFoundException {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: "+id));
@@ -100,20 +101,24 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public UserListDTO buyTrack(UserListDTO userListDTO, TrackDTO trackDTO){
-        User user = userMapper.userfromUserListDto(userListDTO);
-        Track track = trackMapper.fromDto(trackDTO);
-        List<Track> tracks = userListDTO.getPurchasedTracks();
-        tracks.add(track);
-        user.setPurchasedTracks(new HashSet<Track>(tracks));
+    public UserListDTO buyTrack(Long id, TrackDTO trackDTO) throws UserNotFoundException {
+        User user = findById(id);
+        Optional<Track> track = trackService.findByTitle(trackDTO.getTitle());
+        if(track.isEmpty()) {
+            TrackDTO trackDTO1 = trackService.create(trackDTO);
+            user.getPurchasedTracks().add(trackMapper.fromDto(trackDTO1));
+        }
+        else{
+            user.getPurchasedTracks().add(track.get());
+        }
         return userMapper.userListDtoFromUser(userRepository.save(user));
     }
 
-    public UserListDTO createPlaylist(UserListDTO userListDTO, PlaylistDTO playlistDTO){
-        User user = userMapper.userfromUserListDto(userListDTO);
-        Playlist playlist = playlistMapper.fromDTO(playlistDTO);
-        List<Playlist> playlists = userListDTO.getPlaylistList();
-        playlists.add(playlist);
+    public UserListDTO createPlaylist(Long id, PlaylistDTO playlistDTO) throws UserNotFoundException {
+        User user = findById(id);
+        PlaylistDTO playlist = playlistService.create(playlistDTO);
+        List<Playlist> playlists = user.getPlaylistList();
+        playlists.add(playlistMapper.fromDTO(playlist));
         user.setPlaylistList(playlists);
         return userMapper.userListDtoFromUser(userRepository.save(user));
     }

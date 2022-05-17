@@ -57,15 +57,15 @@ public class PlaylistService {
         playlistRepository.deleteById(id);
     }
 
-    public List<TrackDTO> viewTracksFromPlaylist(Long playlist_id){
-        Playlist actPlaylist = findById(playlist_id);
-        return actPlaylist.
-                getTracks()
-                .stream()
-                .map(trackMapper::toDto)
-                .collect(Collectors.toList());
-
-    }
+//    public List<TrackDTO> viewTracksFromPlaylist(Long playlist_id){
+//        Playlist actPlaylist = findById(playlist_id);
+//        return actPlaylist.
+//                getTracks()
+//                .stream()
+//                .map(trackMapper::toDto)
+//                .collect(Collectors.toList());
+//
+//    }
 
     public PlaylistDTO addTrackInPlaylist(Long playlist_id,TrackDTO trackDTO){
         Playlist actPlaylist = findById(playlist_id);
@@ -78,10 +78,6 @@ public class PlaylistService {
             actPlaylist.getTracks().add(track.get());
         }
         return playlistMapper.toDTO(playlistRepository.save(actPlaylist));
-    }
-
-    public PlaylistDTO getPlaylist(Long id){
-        return playlistMapper.toDTO(findById(id));
     }
 
 
