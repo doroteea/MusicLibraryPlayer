@@ -1,17 +1,13 @@
 package com.lab4.demo.track;
 
 import com.lab4.demo.TestCreationFactory;
-import com.lab4.demo.book.model.Book;
 import com.lab4.demo.track.model.Track;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,17 +16,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class TrackRepositoryTest {
 
     @Autowired
-    private TrackRepository repository;
+    private TrackRepository trackRepository;
 
     @BeforeEach
     public void beforeEach() {
-        repository.deleteAll();
+        trackRepository.deleteAll();
     }
 
     @Test
     public void testMock() {
-        Track trackSaved = repository.save(Track.builder()
-                        .id(1L)
+        Track trackSaved = trackRepository.save(Track.builder()
+                .id(1L)
                 .title("title song")
                 .link("link")
                 .preview("preview")
@@ -42,35 +38,15 @@ class TrackRepositoryTest {
         assertNotNull(trackSaved);
 
         assertThrows(DataIntegrityViolationException.class, () -> {
-            repository.save(Track.builder().build());
+            trackRepository.save(Track.builder().build());
         });
     }
 
     @Test
     public void testFindAll() {
-        List<Track> tracks = new ArrayList<>();
-        Track track1 = Track.builder()
-                .title("title song1")
-                .link("link1")
-                .preview("preview1")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name1")
-                .album("title album1")
-                .build();
-        Track track2 = Track.builder()
-                .title("title song2")
-                .link("link2")
-                .preview("preview2")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name")
-                .album("title album")
-                .build();
-        tracks.add(track1);
-        tracks.add(track2);
-        repository.saveAll(tracks);
-        List<Track> all = repository.findAll();
+        List<Track> tracks = TestCreationFactory.listOf(Track.class);
+        trackRepository.saveAll(tracks);
+        List<Track> all = trackRepository.findAll();
         assertEquals(tracks.size(), all.size());
     }
 
@@ -85,9 +61,9 @@ class TrackRepositoryTest {
                 .artist("name1")
                 .album("title album1")
                 .build();
-        repository.save(track1);
-        repository.delete(track1);
-        assertEquals(0, repository.findAll().size());
+        trackRepository.save(track1);
+        trackRepository.delete(track1);
+        assertEquals(0, trackRepository.findAll().size());
     }
 
     @Test
@@ -101,11 +77,11 @@ class TrackRepositoryTest {
                 .artist("name1")
                 .album("title album1")
                 .build();
-        repository.save(track1);
+        trackRepository.save(track1);
         String oldTitle = track1.getTitle();
         track1.setTitle("new title");
-        repository.save(track1);
-        assertNotEquals(oldTitle, repository.findById(track1.getId()).get().getTitle());
+        trackRepository.save(track1);
+        assertNotEquals(oldTitle, trackRepository.findById(track1.getId()).get().getTitle());
 
     }
 
@@ -121,13 +97,12 @@ class TrackRepositoryTest {
                 .album("title album1")
                 .build();
 
-        repository.save(track1);
-        assertEquals(track1, repository.findById(track1.getId()).get());
+        trackRepository.save(track1);
+        assertEquals(track1, trackRepository.findById(track1.getId()).get());
     }
 
     @Test
-    void testPaginationFilter(){
-        List<Track> tracks = new ArrayList<>();
+    public void findByTitle(){
         Track track1 = Track.builder()
                 .title("title song1")
                 .link("link1")
@@ -137,25 +112,10 @@ class TrackRepositoryTest {
                 .artist("name1")
                 .album("title album1")
                 .build();
-        Track track2 = Track.builder()
-                .title("title song2")
-                .link("link2")
-                .preview("preview2")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name")
-                .album("title album")
-                .build();
-        tracks.add(track1);
-        tracks.add(track2);
-        repository.saveAll(tracks);
-        int page = 0;
-        int pageSize = 10;
-        PageRequest pageable = PageRequest.of(page, pageSize);
-        Page<Track> filtered = repository.findAllByTitleLikeOrArtistLikeOrAlbumLike("%g1%","%g1%","%g1%", pageable);
-        assertEquals(1, filtered.getTotalElements());
+
+        Track track = trackRepository.save(track1);
+
+        assertEquals(track, trackRepository.findById(track.getId()).get());
     }
-
-
 
 }

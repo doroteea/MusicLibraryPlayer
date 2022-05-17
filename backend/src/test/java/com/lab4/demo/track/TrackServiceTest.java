@@ -1,11 +1,11 @@
 package com.lab4.demo.track;
 
 
-import com.lab4.demo.book.model.Book;
+import com.lab4.demo.TestCreationFactory;
 import com.lab4.demo.playlist.PlaylistRepository;
 import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
-import com.lab4.demo.user.UserService;
+import com.lab4.demo.track.model.dto.TrackDTO;
+import com.lab4.demo.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,11 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class TrackServiceTest {
@@ -33,38 +31,19 @@ class TrackServiceTest {
     @Mock
     private PlaylistRepository playlistRepository;
 
+
     @Mock
-    private UserService userService;
+    private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        trackService = new TrackService(userService,playlistRepository,trackRepository, trackMapper);
+        trackService = new TrackService(userRepository,playlistRepository,trackRepository, trackMapper);
     }
 
     @Test
     void findAll() {
-        List<Track> tracks = new ArrayList<>();
-        Track track1 = Track.builder()
-                .title("title song1")
-                .link("link1")
-                .preview("preview1")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name1")
-                .album("title album1")
-                .build();
-        Track track2 = Track.builder()
-                .title("title song2")
-                .link("link2")
-                .preview("preview2")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name")
-                .album("title album")
-                .build();
-        tracks.add(track1);
-        tracks.add(track2);
+        List<Track> tracks = TestCreationFactory.listOf(Track.class);
         when(trackRepository.findAll()).thenReturn(tracks);
 
         List<TrackDTO> all = trackService.findAll();
@@ -138,7 +117,43 @@ class TrackServiceTest {
         when(trackRepository.existsById(track.getId())).thenReturn(false);
 
         trackService.delete(track.getId());
-        Assertions.assertTrue(!trackRepository.existsById(track.getId()));
+        Assertions.assertFalse(trackRepository.existsById(track.getId()));
+    }
+
+    @Test
+    void findById(){
+        Track track = Track.builder()
+                .id(1L)
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        when(trackRepository.findById(track.getId())).thenReturn(Optional.of(track));
+        Track trackDTO = trackService.getTrackById(track.getId());
+
+        Assertions.assertEquals(track.getTitle(),trackDTO.getTitle());
+    }
+
+    @Test
+    void findByTitle(){
+        Track track = Track.builder()
+                .id(1L)
+                .title("title song1")
+                .link("link1")
+                .preview("preview1")
+                .duration(122)
+                .explicit_lyrics(true)
+                .artist("name1")
+                .album("title album1")
+                .build();
+        when(trackRepository.findByTitle(track.getTitle())).thenReturn(Optional.of(track));
+        Optional<Track> trackDTO = trackService.findByTitle(track.getTitle());
+
+        Assertions.assertEquals(track,trackDTO.get());
     }
 
 }

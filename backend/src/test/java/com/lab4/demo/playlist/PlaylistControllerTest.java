@@ -4,8 +4,11 @@ import com.lab4.demo.BaseControllerTest;
 import com.lab4.demo.TestCreationFactory;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
-import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.user.UserService;
+import com.lab4.demo.user.dto.UserListDTO;
+import com.lab4.demo.user.model.ERole;
+import com.lab4.demo.user.model.Role;
+import com.lab4.demo.user.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,10 +18,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.lab4.demo.TestCreationFactory.randomLong;
-import static com.lab4.demo.UrlMapping.PLAYLIST;
-import static com.lab4.demo.UrlMapping.PLAYLIST_ID_PART;
+import static com.lab4.demo.UrlMapping.*;
+import static com.lab4.demo.user.model.ERole.EMPLOYEE;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,10 +35,13 @@ class PlaylistControllerTest extends BaseControllerTest {
     @Mock
     private PlaylistService playlistService;
 
+    @Mock
+    private UserService userService;
+
     @BeforeEach
     protected void setUp() {
         super.setUp();
-        playlistController = new PlaylistController(playlistService);
+        playlistController = new PlaylistController(userService,playlistService);
         mockMvc = MockMvcBuilders.standaloneSetup(playlistController).build();
     }
 
@@ -52,16 +59,37 @@ class PlaylistControllerTest extends BaseControllerTest {
     @Test
     void create() throws Exception {
         PlaylistDTO playlist = PlaylistDTO.builder()
+                .id(1L)
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
                 .build();
 
-        when(playlistService.create(playlist)).thenReturn(playlist);
+        UserListDTO userDTO = UserListDTO.builder()
+                .id(1L)
+                .name("doro")
+                .email("doro@yahoo.com")
+                .password("password1")
+                .roles(Set.of(EMPLOYEE.name()))
+                .playlistList(new ArrayList<>())
+                .build();
 
-        ResultActions result = performPostWithRequestBody(PLAYLIST, playlist);
+        User user = User.builder()
+                .id(1L)
+                .username("doro")
+                .email("doro@yahoo.com")
+                .password("password1")
+                .roles(Set.of(Role.builder().id(358).name(ERole.EMPLOYEE).build()))
+                .playlistList(new ArrayList<>())
+                .build();
+
+        when(playlistService.create(playlist)).thenReturn(playlist);
+        when(userService.findById(userDTO.getId())).thenReturn(user);
+        when(userService.createPlaylist(userDTO.getId(),playlist)).thenReturn(userDTO);
+
+        ResultActions result = performPutWithRequestBodyAndPathVariables(PLAYLIST + ADD_PLAYLIST, playlist,1L);
         result.andExpect(status().isOk())
-                .andExpect(jsonContentToBe(playlist));
+                .andExpect(jsonContentToBe(userDTO));
     }
 
     @Test
@@ -95,50 +123,5 @@ class PlaylistControllerTest extends BaseControllerTest {
 
         ResultActions response = performDeleteWithPathVariable(PLAYLIST + PLAYLIST_ID_PART, playlist.getId());
         response.andExpect(status().isOk());
-    }
-
-    @Test
-    void addTrack() throws Exception {
-        Playlist playlist = Playlist.builder()
-                .id(1L)
-                .title("Playlist")
-                .tracks(new ArrayList<>())
-                .duration(100)
-                .build();
-        PlaylistDTO playlistDTO = PlaylistDTO.builder()
-                .id(1L)
-                .title("Playlist")
-                .tracks(new ArrayList<>())
-                .duration(100)
-                .build();
-        when(playlistService.create(playlistDTO)).thenReturn(playlistDTO);
-        PlaylistDTO playlistDTO1 = playlistService.create(playlistDTO);
-
-        TrackDTO track1 = TrackDTO.builder()
-                .title("title song1")
-                .link("link1")
-                .preview("preview1")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name1")
-                .album("title album1")
-                .build();
-        Track track = Track.builder()
-                .title("title song1")
-                .link("link1")
-                .preview("preview1")
-                .duration(122)
-                .explicit_lyrics(true)
-                .artist("name1")
-                .album("title album1")
-                .build();
-        playlistDTO1.getTracks().add(track1);
-
-        when(playlistService.addTrackInPlaylist(playlistDTO1.getId(),track1)).thenReturn(playlistDTO1);
-
-        ResultActions result = performPutWithRequestBodyAndPathVariables(PLAYLIST + PLAYLIST_ID_PART + "/tracks", track1, playlistDTO.getId());
-        result.andExpect(status().isOk())
-                .andExpect(jsonContentToBe(playlistDTO1));
-
     }
 }

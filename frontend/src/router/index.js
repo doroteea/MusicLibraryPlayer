@@ -6,7 +6,6 @@ import { auth as store } from "../store/auth.module";
 import Login from "../views/Login";
 import Tracks from "../views/Tracks";
 import Playlists from "../views/Playlists";
-import PlaylistTracks from "../views/PlaylistTracks";
 import TracksAPI from "../views/TracksAPI";
 import Payment from "../views/Payment";
 import PaymentSuccess from "../views/PaymentSuccess";
@@ -71,18 +70,6 @@ const routes = [
     path: "/tracksAPI",
     name: "TracksAPI",
     component: TracksAPI,
-    beforeEnter: (to, from, next) => {
-      if (store.state.status.loggedIn) {
-        next();
-      } else {
-        next({ name: "Home" });
-      }
-    },
-  },
-  {
-    path: "/playlists/{id}/tracks",
-    name: "PlaylistTracks",
-    component: PlaylistTracks,
     beforeEnter: (to, from, next) => {
       if (store.state.status.loggedIn) {
         next();

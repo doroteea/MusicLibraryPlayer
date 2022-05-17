@@ -76,7 +76,7 @@ export default {
     purchaseTrack() {
       api.tracksApi
         .purchaseTrack({
-          id: this.track.id,
+          id: this.$store.getters["auth/getUserID"],
           title: this.track.title,
           link: this.track.link,
           duration: this.track.duration,
@@ -89,7 +89,7 @@ export default {
     },
     submit() {
       this.purchaseTrack();
-      // this.$refs.checkoutRef.redirectToCheckout();
+      this.$refs.checkoutRef.redirectToCheckout();
     },
   },
 };

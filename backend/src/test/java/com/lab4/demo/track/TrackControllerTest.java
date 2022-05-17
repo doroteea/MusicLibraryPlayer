@@ -2,17 +2,7 @@ package com.lab4.demo.track;
 
 import com.lab4.demo.BaseControllerTest;
 import com.lab4.demo.TestCreationFactory;
-import com.lab4.demo.book.BookController;
-import com.lab4.demo.book.model.Book;
-import com.lab4.demo.book.model.dto.BookDTO;
-import com.lab4.demo.playlist.model.dto.PlaylistDTO;
-import com.lab4.demo.security.dto.MessageResponse;
-import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
-import com.lab4.demo.user.UserController;
-import com.lab4.demo.user.UserNotFoundException;
-import com.lab4.demo.user.UserService;
-import com.lab4.demo.user.dto.UserListDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,12 +10,10 @@ import org.mockito.Mock;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import static com.lab4.demo.UrlMapping.*;
+import static com.lab4.demo.UrlMapping.TRACKS;
+import static com.lab4.demo.UrlMapping.TRACK_ID_PART;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,9 +25,6 @@ public class TrackControllerTest extends BaseControllerTest {
     @Mock
     private TrackService trackService;
 
-    @Mock
-    private UserService userService;
-
     @BeforeEach
     protected void setUp() {
         super.setUp();
@@ -47,26 +32,18 @@ public class TrackControllerTest extends BaseControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-//    @Test
-//    void allTracks() throws Exception {
-//        List<TrackDTO> tracks;
-//
-//        tracks = controller.searchTracks("eminem");
-//        tracks.forEach(track -> {
-//            System.out.println(track.getTitle());
-//        });
-//
-//    }
-//
-//    @Test
-//    void filterBY(){
-//        List<TrackDTO> tracks;
-//
-//        tracks = controller.findAllByFilter("eminem");
-//        tracks.forEach(track -> {
-//            System.out.println(track.getTitle());
-//        });
-//    }
+    @Test
+    void allTracks() throws Exception {
+        List<TrackDTO> trackDTOS = TestCreationFactory.listOf(TrackDTO.class);
+        when(trackService.findAll()).thenReturn(trackDTOS);
+
+        ResultActions response = performGet(TRACKS);
+
+        response.andExpect(status().isOk())
+                .andExpect(jsonContentToBe(trackDTOS));
+
+    }
+
 
     @Test
     void create() throws Exception {

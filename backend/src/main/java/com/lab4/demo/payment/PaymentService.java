@@ -18,24 +18,6 @@ import static spark.Spark.post;
 @RequiredArgsConstructor
 public class PaymentService {
 
-    private SessionCreateParams.LineItem.PriceData createPrice(PaymentDTO paymentDTO){
-        return SessionCreateParams.LineItem.PriceData.builder()
-                .setCurrency("usd")
-                .setUnitAmount(2000L)
-                .setProductData(
-                        SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                .setName(paymentDTO.getName())
-                                .build())
-                .build();
-    }
-
-    private SessionCreateParams.LineItem createLineItem(PaymentDTO paymentDTO){
-        return SessionCreateParams.LineItem.builder()
-                .setQuantity(1L)
-                .setPriceData(createPrice(paymentDTO))
-                .build();
-    }
-
     public void createSession(PaymentDTO paymentDTO) {
         port(4242);
         Stripe.apiKey = "sk_test_51KzStYBeCTO9xhNTcPx39YpKDBG9dKcAdb9FOec7lkJr7AuRmfTg2OsUujZoKglyvC1NDuVCnGbcjrSAlufSuK1l00F7OrmT96";
@@ -47,7 +29,17 @@ public class PaymentService {
                             .setMode(SessionCreateParams.Mode.PAYMENT)
                             .setSuccessUrl(SUCCESS_PAYMENT)
                             .setCancelUrl(FAIL_PAYMENT)
-                            .addLineItem(createLineItem(paymentDTO))
+                            .addLineItem(SessionCreateParams.LineItem.builder()
+                                    .setQuantity(1L)
+                                    .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                            .setCurrency("usd")
+                                            .setUnitAmount(2000L)
+                                            .setProductData(
+                                                    SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                            .setName(paymentDTO.getName())
+                                                            .build())
+                                            .build())
+                                    .build())
                             .build();
 
             Session session = Session.create(params);

@@ -7,7 +7,7 @@ import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.TrackMapper;
 import com.lab4.demo.track.TrackService;
 import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.dto.UserListDTO;
 import com.lab4.demo.user.dto.UserMinimalDTO;
 import com.lab4.demo.user.mapper.UserMapper;
@@ -105,6 +105,8 @@ public class UserService {
         User user = findById(id);
         Optional<Track> track = trackService.findByTitle(trackDTO.getTitle());
         if(track.isEmpty()) {
+            Random tid = new Random();
+            trackDTO.setId((long) tid.nextInt());
             TrackDTO trackDTO1 = trackService.create(trackDTO);
             user.getPurchasedTracks().add(trackMapper.fromDto(trackDTO1));
         }
@@ -116,25 +118,11 @@ public class UserService {
 
     public UserListDTO createPlaylist(Long id, PlaylistDTO playlistDTO) throws UserNotFoundException {
         User user = findById(id);
+        playlistDTO.setTracks(new ArrayList<>());
         PlaylistDTO playlist = playlistService.create(playlistDTO);
         List<Playlist> playlists = user.getPlaylistList();
         playlists.add(playlistMapper.fromDTO(playlist));
         user.setPlaylistList(playlists);
         return userMapper.userListDtoFromUser(userRepository.save(user));
     }
-
-    public UserListDTO deletePlaylist(UserListDTO userListDTO, PlaylistDTO playlistDTO){
-        User user = userMapper.userfromUserListDto(userListDTO);
-        //user.getPlaylistList().removeIf(playlist -> playlist.getId().equals(playlistDTO.getId()));
-        for (Iterator<Playlist> iterator = user.getPlaylistList().iterator(); iterator.hasNext(); ) {
-            Playlist playlist = iterator.next();
-            if (playlist.getId().equals(playlistDTO.getId())) {
-                iterator.remove();
-            }
-        }
-        //userListDTO.setPlaylistList(playlists);
-        return userMapper.userListDtoFromUser(userRepository.save(user));
-    }
-
-
 }

@@ -11,9 +11,6 @@
         hide-details
       ></v-text-field>
       <v-btn @click="addUser">Add User</v-btn>
-      <v-btn @click="goBooks">Go to Tracks</v-btn>
-      <v-btn @click="goToPlaylists">My Playlists</v-btn>
-      <v-btn @click="goToApi">Tracks Api</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -55,15 +52,6 @@ export default {
     };
   },
   methods: {
-    goBooks() {
-      this.$router.push("/tracks");
-    },
-    goToPlaylists() {
-      this.$router.push("/playlists");
-    },
-    goToApi() {
-      this.$router.push("/tracksAPI");
-    },
     editUser(user) {
       this.selectedUser = user;
       this.dialogVisible = true;

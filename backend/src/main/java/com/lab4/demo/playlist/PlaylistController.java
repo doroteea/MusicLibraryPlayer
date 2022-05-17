@@ -1,7 +1,6 @@
 package com.lab4.demo.playlist;
 
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
-import com.lab4.demo.track.model.TrackDTO;
 import com.lab4.demo.user.UserNotFoundException;
 import com.lab4.demo.user.UserService;
 import com.lab4.demo.user.dto.UserListDTO;
@@ -13,7 +12,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static com.lab4.demo.UrlMapping.*;
-import static com.lab4.demo.UrlMapping.TRACK_ID_PART;
 
 @Validated
 @RestController
@@ -29,7 +27,7 @@ public class PlaylistController {
         return playlistService.findAll();
     }
 
-    @PutMapping("/create/{id}")
+    @PutMapping(ADD_PLAYLIST)
     public UserListDTO create(@PathVariable Long id, @Valid @RequestBody PlaylistDTO playlistDTO) throws UserNotFoundException {
         return userService.createPlaylist(id,playlistDTO);
     }
@@ -43,10 +41,5 @@ public class PlaylistController {
     public void delete(@PathVariable long id){
         playlistService.delete(id);
     }
-
-//    @GetMapping("/tracks" + PLAYLIST_ID_PART)
-//    public PlaylistDTO getplaylist(@PathVariable long id){
-//        return playlistService.getPlaylist(id);
-//    }
 
 }

@@ -1,13 +1,11 @@
 package com.lab4.demo.playlist.model.dto;
 
-import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +19,12 @@ public class PlaylistDTO {
 
     private String title;
 
-    private List<TrackDTO> tracks = new ArrayList<>();
+    private List<TrackDTO> tracks;
 
     private Integer duration;
 
     public void setDuration(){
+        this.duration = 0;
         for(TrackDTO track: this.tracks) {
             this.duration += track.getDuration();
         }

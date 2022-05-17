@@ -1,11 +1,13 @@
 package com.lab4.demo.user;
 import com.lab4.demo.playlist.PlaylistMapper;
+import com.lab4.demo.playlist.PlaylistService;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.report.ReportServiceFactory;
 import com.lab4.demo.track.TrackMapper;
+import com.lab4.demo.track.TrackService;
 import com.lab4.demo.track.model.Track;
-import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.dto.UserListDTO;
 import com.lab4.demo.user.mapper.UserMapper;
 import com.lab4.demo.user.model.ERole;
@@ -48,15 +50,21 @@ public class UserServiceTest {
     private ReportServiceFactory reportServiceFactory;
 
     @Mock
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Mock
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
+
+    @Mock
+    private PlaylistService playlistService;
+
+    @Mock
+    private TrackService trackService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        userService = new UserService(userRepository,roleRepository, userMapper,passwordEncoder,trackMapper,playlistMapper);
+        userService = new UserService(userRepository,roleRepository, userMapper,passwordEncoder,trackService,trackMapper,playlistMapper,playlistService);
     }
 
     @Test
@@ -121,7 +129,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void buyTrack(){
+    void buyTrack() throws UserNotFoundException {
         UserListDTO userListDTO = UserListDTO.builder()
                 .id(1L)
                 .name("test")
@@ -164,117 +172,74 @@ public class UserServiceTest {
                 .link("no")
                 .preview("no")
                 .build();
+        List<Track> tracks = new ArrayList<>();
+        tracks.add(track);
+        user.setPurchasedTracks(new HashSet<>(tracks));
 
-        when(userMapper.userfromUserListDto(userListDTO)).thenReturn(user);
+        List<TrackDTO> tracks2 = new ArrayList<>();
+        tracks2.add(trackDTO);
+        userListDTO.setPurchasedTracks(tracks2);
+
+        when(userRepository.findById(userListDTO.getId())).thenReturn(Optional.of(user));
+        when(trackService.findByTitle(trackDTO.getTitle())).thenReturn(Optional.of(track));
+        when(trackService.create(trackDTO)).thenReturn(trackDTO);
         when(trackMapper.fromDto(trackDTO)).thenReturn(track);
         when(userMapper.userListDtoFromUser(userRepository.save(user))).thenReturn(userListDTO);
 
-        List<Track> tracks = userListDTO.getPurchasedTracks();
-        tracks.add(track);
-        userListDTO.setPurchasedTracks(tracks);
+        UserListDTO userListDTO1 = userService.buyTrack(userListDTO.getId(),trackDTO);
 
-        ///userService.buyTrack(userListDTO,trackDTO);
-
-        //Assertions.assertEquals(track,userListDTO.getPurchasedTracks().get(0));
+        Assertions.assertEquals(trackDTO.getTitle(),userListDTO1.getPurchasedTracks().get(0).getTitle());
 
     }
 
     @Test
-    void deletePlaylist(){
+    void createPlaylist() throws UserNotFoundException {
+        UserListDTO userListDTO = UserListDTO.builder()
+                .id(1L)
+                .name("test")
+                .password("test")
+                .roles(new HashSet<>(Set.of(EMPLOYEE.name())))
+                .email("email@yahoo.com")
+                .purchasedTracks(new ArrayList<>())
+                .playlistList(new ArrayList<>())
+                .build();
+
+        Role defaultRole = Role.builder().id(358).name(ERole.EMPLOYEE).build();
+        User user = User.builder()
+                .id(1L)
+                .username("doro")
+                .email("doro@yahoo.com")
+                .password("password1")
+                .roles(Set.of(defaultRole))
+                .purchasedTracks(new HashSet<>())
+                .playlistList(new ArrayList<>())
+                .build();
+
         Playlist playlist = Playlist.builder()
                 .id(1L)
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .build();
-
         PlaylistDTO playlistDTO = PlaylistDTO.builder()
                 .id(1L)
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .build();
-
         List<Playlist> playlists = new ArrayList<>();
         playlists.add(playlist);
+        user.setPlaylistList(playlists);
 
-        UserListDTO userListDTO = UserListDTO.builder()
-                .id(1L)
-                .name("test")
-                .password("test")
-                .roles(new HashSet<>(Set.of(EMPLOYEE.name())))
-                .email("email@yahoo.com")
-                .purchasedTracks(new ArrayList<>())
-                .playlistList(playlists)
-                .build();
+        List<PlaylistDTO> playlists2 = new ArrayList<>();
+        playlists2.add(playlistDTO);
+        userListDTO.setPlaylistList(playlists2);
 
-        Role defaultRole = Role.builder().id(358).name(ERole.EMPLOYEE).build();
-        User user = User.builder()
-                .id(1L)
-                .username("doro")
-                .email("doro@yahoo.com")
-                .password("password1")
-                .roles(Set.of(defaultRole))
-                .purchasedTracks(new HashSet<>())
-                .playlistList(playlists)
-                .build();
-
-
-        when(userMapper.userfromUserListDto(userListDTO)).thenReturn(user);
+        when(userRepository.findById(userListDTO.getId())).thenReturn(Optional.of(user));
+        when(playlistService.create(playlistDTO)).thenReturn(playlistDTO);
         when(playlistMapper.fromDTO(playlistDTO)).thenReturn(playlist);
         when(userMapper.userListDtoFromUser(userRepository.save(user))).thenReturn(userListDTO);
 
+        UserListDTO userListDTO1 = userService.createPlaylist(userListDTO.getId(),playlistDTO);
 
-        userListDTO.setPlaylistList(new ArrayList<>());
-
-        userService.deletePlaylist(userListDTO,playlistDTO);
-
-        Assertions.assertEquals(0,userListDTO.getPlaylistList().size());
-    }
-
-    @Test
-    void createPlaylist(){
-        UserListDTO userListDTO = UserListDTO.builder()
-                .id(1L)
-                .name("test")
-                .password("test")
-                .roles(new HashSet<>(Set.of(EMPLOYEE.name())))
-                .email("email@yahoo.com")
-                .purchasedTracks(new ArrayList<>())
-                .playlistList(new ArrayList<>())
-                .build();
-
-        Role defaultRole = Role.builder().id(358).name(ERole.EMPLOYEE).build();
-        User user = User.builder()
-                .id(1L)
-                .username("doro")
-                .email("doro@yahoo.com")
-                .password("password1")
-                .roles(Set.of(defaultRole))
-                .purchasedTracks(new HashSet<>())
-                .playlistList(new ArrayList<>())
-                .build();
-
-        Playlist playlist = Playlist.builder()
-                .id(1L)
-                .title("Playlist")
-                .tracks(new ArrayList<>())
-                .build();
-
-        PlaylistDTO playlistDTO = PlaylistDTO.builder()
-                .id(1L)
-                .title("Playlist")
-                .tracks(new ArrayList<>())
-                .build();
-
-        when(userMapper.userfromUserListDto(userListDTO)).thenReturn(user);
-        when(playlistMapper.fromDTO(playlistDTO)).thenReturn(playlist);
-        when(userMapper.userListDtoFromUser(userRepository.save(user))).thenReturn(userListDTO);
-
-        List<Playlist> playlists = userListDTO.getPlaylistList();
-        playlists.add(playlist);
-        userListDTO.setPlaylistList(playlists);
-
-        userService.createPlaylist(userListDTO,playlistDTO);
-
-        Assertions.assertEquals(playlist,userListDTO.getPlaylistList().get(0));
+        Assertions.assertEquals(playlistDTO.getTitle(),userListDTO1.getPlaylistList().get(0).getTitle());
     }
 }

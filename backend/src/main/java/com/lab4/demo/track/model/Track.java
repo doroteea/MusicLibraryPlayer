@@ -1,7 +1,5 @@
 package com.lab4.demo.track.model;
 
-import com.lab4.demo.album.Album;
-import com.lab4.demo.artist.Artist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -16,7 +16,6 @@
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
-              @input="filterTracks"
               append-icon="mdi-magnify"
               label="Search"
               single-line
@@ -37,7 +36,6 @@
           </v-btn>
           <v-btn @click="addPlaylist">Add Playlist</v-btn>
           <v-btn @click="deletePlaylist">Delete Playlist</v-btn>
-          <v-btn @click="goToTracks">Go to Tracks</v-btn>
         </v-card-actions>
       </v-card>
     </template>
@@ -99,7 +97,7 @@ export default {
     addPlaylist() {
       api.playlists
         .create({
-          id: this.playlist.id,
+          id: this.$store.getters["auth/getUserID"],
           title: this.playlist.title,
           duration: 0,
         })
@@ -114,9 +112,6 @@ export default {
         })
         .then(() => this.$emit("refresh"));
     },
-    goToTracks() {
-      this.$router.push("/tracks");
-    },
     sing(track) {
       if (this.audio) {
         this.audio.pause();
@@ -126,7 +121,6 @@ export default {
     },
   },
   computed: {
-    console: () => console,
     isNew: function () {
       return !this.playlist.tracks && !this.playlist.id;
     },

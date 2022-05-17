@@ -10,14 +10,12 @@
         single-line
         hide-details
       ></v-text-field>
-      <v-btn @click="goToPlaylists">Go To Playlists</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
       yarn
       :items="tracks"
       :search="search"
-      :custom-filter="filter"
       @click:row="addToPlaylist"
     ></v-data-table>
     <TracksApiDialog
@@ -70,9 +68,6 @@ export default {
       this.selectedTrack = track;
       this.audio = new Audio(this.selectedTrack.preview);
       this.audio.play();
-    },
-    goToPlaylists() {
-      this.$router.push("/playlists");
     },
   },
   created() {

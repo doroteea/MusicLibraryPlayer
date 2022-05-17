@@ -3,8 +3,7 @@ package com.lab4.demo.playlist;
 import com.lab4.demo.TestCreationFactory;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
-import com.lab4.demo.track.TrackService;
-import com.lab4.demo.track.model.TrackDTO;
+import com.lab4.demo.track.model.dto.TrackDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,9 +22,6 @@ public class PlaylistServiceIntegrationTest {
     @Autowired
     private PlaylistRepository playlistRepository;
 
-    @Autowired
-    private TrackService trackService;
-
     @BeforeEach
     void setUp() {
         playlistRepository.deleteAll();
@@ -42,16 +38,29 @@ public class PlaylistServiceIntegrationTest {
     }
 
     @Test
-    void create(){
-        PlaylistDTO reqItem = PlaylistDTO.builder()
+    void find(){
+        PlaylistDTO playlist = PlaylistDTO.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
                 .build();
-        PlaylistDTO resItem = playlistService.create(reqItem);
+        PlaylistDTO playlistDTO = playlistService.create(playlist);
+        Playlist playlist1 = playlistService.findById(playlistDTO.getId());
+
+        Assertions.assertEquals(playlistDTO.getTitle(),playlist1.getTitle());
+    }
+
+    @Test
+    void create(){
+        PlaylistDTO playlist = PlaylistDTO.builder()
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        PlaylistDTO resItem = playlistService.create(playlist);
 
         Assertions.assertNotNull(resItem);
-        Assertions.assertEquals(reqItem.getTitle(),resItem.getTitle());
+        Assertions.assertEquals(playlist.getTitle(),resItem.getTitle());
     }
 
     @Test
@@ -74,14 +83,14 @@ public class PlaylistServiceIntegrationTest {
 
     @Test
     void delete(){
-        PlaylistDTO req = PlaylistDTO.builder()
+        PlaylistDTO playlist = PlaylistDTO.builder()
                 .id(1L)
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
                 .build();
 
-        PlaylistDTO PlaylistDTO =  playlistService.create(req);
+        PlaylistDTO PlaylistDTO =  playlistService.create(playlist);
 
         playlistService.delete(PlaylistDTO.getId());
         List<PlaylistDTO> all = playlistService.findAll();
@@ -111,8 +120,7 @@ public class PlaylistServiceIntegrationTest {
 
         PlaylistDTO playlistDTO2 = playlistService.addTrackInPlaylist(playlistDTO1.getId(),track1);
 
-        System.out.println(playlistDTO2.getTracks().get(0).getTitle());
-        Assertions.assertTrue(playlistDTO2.getTracks().get(0).getTitle().equals(track1.getTitle()));
+        Assertions.assertEquals(playlistDTO2.getTracks().get(0).getTitle(), track1.getTitle());
     }
 
 }
