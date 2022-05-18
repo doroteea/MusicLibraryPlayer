@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import UserList from "../views/UserList.vue";
-import ItemList from "../views/ItemList.vue";
 import { auth as store } from "../store/auth.module";
 import Login from "../views/Login";
 import Tracks from "../views/Tracks";
@@ -10,6 +9,7 @@ import TracksAPI from "../views/TracksAPI";
 import Payment from "../views/Payment";
 import PaymentSuccess from "../views/PaymentSuccess";
 import PaymentFail from "../views/PaymentFail";
+import Comments from "../views/Comments";
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,18 +27,6 @@ const routes = [
         next();
       } else {
         next({ name: "Playlists" });
-      }
-    },
-  },
-  {
-    path: "/items",
-    name: "Items",
-    component: ItemList,
-    beforeEnter: (to, from, next) => {
-      if (store.state.status.loggedIn) {
-        next();
-      } else {
-        next({ name: "Home" });
       }
     },
   },
@@ -70,6 +58,18 @@ const routes = [
     path: "/tracksAPI",
     name: "TracksAPI",
     component: TracksAPI,
+    beforeEnter: (to, from, next) => {
+      if (store.state.status.loggedIn) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
+  },
+  {
+    path: "/comments",
+    name: "Comments",
+    component: Comments,
     beforeEnter: (to, from, next) => {
       if (store.state.status.loggedIn) {
         next();

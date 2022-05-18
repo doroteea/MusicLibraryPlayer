@@ -11,11 +11,6 @@ public class UrlMapping {
     public static final String PLAYLIST_ID_PART = "/{id}" ;
     public static final String ADD_PLAYLIST = "/create" + PLAYLIST_ID_PART ;
 
-    public static final String BOOKS = API_PATH + "/items";
-
-    public static final String BOOKS_ID_PART = "/{id}";
-    public static final String EXPORT_REPORT = "/export/{type}";
-
     public static final String AUTH = API_PATH + "/auth";
     public static final String SIGN_IN = "/sign-in";
     public static final String SIGN_UP = "/sign-up";
@@ -23,11 +18,9 @@ public class UrlMapping {
     public static final String USER = API_PATH + "/user";
     public static final String USER_ID_PART = "/{id}";
 
-    public static final String SELL ="/sell";
+    public static final String COMMENTS = API_PATH + "/comments";
+    public static final String COMMENT_ID_PART = "/{id}";
 
-    public static final String FIND_SEARCH_BAR ="/filter/{filter}";
-
-    //PaymentDTO
     public static final String PAYMENT = API_PATH + "/payment";
     public static final String FAIL_PAYMENT = "http://localhost:8091"+"/payment/fail";
     public static final String SUCCESS_PAYMENT = "http://localhost:8091"+"payment/success";
