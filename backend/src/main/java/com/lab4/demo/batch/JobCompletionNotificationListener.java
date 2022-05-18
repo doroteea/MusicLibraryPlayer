@@ -1,6 +1,6 @@
 package com.lab4.demo.batch;
 
-import com.lab4.demo.track.model.TrackBatch;
+import com.lab4.demo.track.model.Track;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -27,10 +27,9 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 		if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("!!! JOB FINISHED! Time to verify the results");
 
-			jdbcTemplate.query("SELECT id, artist, album,duration,explicit_lyrics,link,preview,title FROM tracks",
-				(rs, row) -> new TrackBatch(
-					//rs.getLong(1),
-						1450317612L,
+			jdbcTemplate.query("SELECT id, artist, album,duration,explicit_lyrics,link,preview,title FROM track",
+				(rs, row) -> new Track(
+					rs.getLong(1),
 					rs.getString(2),
 					rs.getString(3),
 					rs.getInt(4),

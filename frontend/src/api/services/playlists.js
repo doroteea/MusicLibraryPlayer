@@ -62,4 +62,11 @@ export default {
       return response.data;
     });
   },
+  sendMail() {
+    return HTTP.post(BASE_URL + "/playlists/sendemail", {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
+  },
 };

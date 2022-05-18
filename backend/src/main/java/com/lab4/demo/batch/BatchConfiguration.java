@@ -2,34 +2,24 @@ package com.lab4.demo.batch;
 
 import javax.sql.DataSource;
 
-import com.lab4.demo.track.model.TrackBatch;
+import com.lab4.demo.track.TrackRepository;
+import com.lab4.demo.track.model.Track;
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.TimerTask;
-import java.util.function.Function;
 
 @Configuration
 @EnableBatchProcessing
@@ -40,15 +30,20 @@ public class BatchConfiguration {
 
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
-@Bean
-public FlatFileItemReader<TrackBatch> reader() {
-    return new FlatFileItemReaderBuilder<TrackBatch>()
+
+    public BatchConfiguration(TrackRepository trackRepository) {
+        this.trackRepository = trackRepository;
+    }
+
+    @Bean
+public FlatFileItemReader<Track> reader() {
+    return new FlatFileItemReaderBuilder<Track>()
             .name("TrackBatchItemReader")
             .resource(new ClassPathResource("Book1.csv"))
             .delimited()
             .names("id", "artist", "album", "duration", "explicit_lyrics", "link","preview", "title")
-            .fieldSetMapper(new BeanWrapperFieldSetMapper<TrackBatch>() {{
-                setTargetType(TrackBatch.class);
+            .fieldSetMapper(new BeanWrapperFieldSetMapper<Track>() {{
+                setTargetType(Track.class);
             }})
             .build();
 }
@@ -59,10 +54,10 @@ public FlatFileItemReader<TrackBatch> reader() {
     }
 
     @Bean
-    public JdbcBatchItemWriter<TrackBatch> writer(DataSource dataSource) {
-        return new JdbcBatchItemWriterBuilder<TrackBatch>()
+    public JdbcBatchItemWriter<Track> writer(DataSource dataSource) {
+        return new JdbcBatchItemWriterBuilder<Track>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO tracks (id, artist, album,duration,explicit_lyrics,link,preview,title) VALUES (:id, :artist, :album, :duration, :explicit_lyrics, :link, :preview, :title)")
+                .sql("INSERT INTO track (id,artist, album,duration,explicit_lyrics,link,preview,title) VALUES (:id, :preview, :album, :duration, :explicit_lyrics, :link, :artist, :title)")
                 .dataSource(dataSource)
                 .build();
     }
@@ -77,10 +72,13 @@ public FlatFileItemReader<TrackBatch> reader() {
                 .build();
     }
 
+    private final TrackRepository trackRepository;
     @Bean
-    public Step step1(JdbcBatchItemWriter<TrackBatch> writer) {
+    public Step step1(JdbcBatchItemWriter<Track> writer) {
+
+        trackRepository.deleteAll();
         return stepBuilderFactory.get("step1")
-                .<TrackBatch, TrackBatch> chunk(10)
+                .<Track, Track> chunk(10)
                 .reader(reader())
                 .processor(processor())
                 .writer(writer)

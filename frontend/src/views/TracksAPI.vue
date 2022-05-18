@@ -17,7 +17,9 @@
       :items="tracks"
       :search="search"
       @click:row="addToPlaylist"
-    ></v-data-table>
+    >
+    </v-data-table>
+
     <TracksApiDialog
       :opened="dialogVisible"
       :track="selectedTrack"

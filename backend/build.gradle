@@ -92,6 +92,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.hsqldb/hsqldb
     testImplementation group: 'org.hsqldb', name: 'hsqldb', version: '2.0.0'
 
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.7'
+    implementation 'javax.mail:javax.mail-api:1.6.2'
 
 }
 

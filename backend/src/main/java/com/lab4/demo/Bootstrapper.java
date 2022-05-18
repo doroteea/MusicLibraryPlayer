@@ -44,7 +44,7 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
             userRepository.deleteAll();
             roleRepository.deleteAll();
             playlistRepository.deleteAll();
-            trackRepository.deleteAll();
+            //trackRepository.deleteAll();
             for (ERole value : ERole.values()) {
                 roleRepository.save(
                         Role.builder()
@@ -53,45 +53,45 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
                 );
             }
             authService.register(SignupRequest.builder()
-                    .email("alex@email.com")
+                    .email("popaadriana2606@gmail.com")
                     .username("alex")
                     .password("WooHoo1!")
                     .roles(Set.of("ADMIN"))
                     .build());
             authService.register(SignupRequest.builder()
-                    .email("alex1@email.com")
+                    .email("sandordoroteea@gmail.com")
                     .username("alex1")
                     .password("WooHoo1!")
                     .roles(Set.of("EMPLOYEE"))
                     .build());
 
-            trackRepository.save(Track.builder()
-                    .title("title song1")
-                    .link("link1")
-                    .preview("preview1")
-                    .duration(122)
-                    .explicit_lyrics(true)
-                    .artist("name1")
-                    .album("title album1")
-                    .build());
+//            trackRepository.save(Track.builder()
+//                    .title("title song1")
+//                    .link("link1")
+//                    .preview("preview1")
+//                    .duration(122)
+//                    .explicit_lyrics(true)
+//                    .artist("name1")
+//                    .album("title album1")
+//                    .build());
+//
+//            trackRepository.save(Track.builder()
+//                    .title("title song2")
+//                    .link("link2")
+//                    .preview("preview1")
+//                    .duration(122)
+//                    .explicit_lyrics(true)
+//                    .artist("name1")
+//                    .album("title album1")
+//                    .build());
 
-            trackRepository.save(Track.builder()
-                    .title("title song2")
-                    .link("link2")
-                    .preview("preview1")
-                    .duration(122)
-                    .explicit_lyrics(true)
-                    .artist("name1")
-                    .album("title album1")
-                    .build());
-
-            List<Track> tracks = trackRepository.findAll();
-            playlistRepository.save(Playlist.builder()
-                    .title("My Playlist")
-                    .tracks(tracks)
-                    .duration(100)
-                    .build());
-
+//            List<Track> tracks = trackRepository.findAll();
+//            playlistRepository.save(Playlist.builder()
+//                    .title("My Playlist")
+//                    .tracks(tracks)
+//                    .duration(100)
+//                    .build());
+//
         }
     }
 }

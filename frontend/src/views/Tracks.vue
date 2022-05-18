@@ -18,7 +18,8 @@
       :items="tracks"
       :search="search"
       @click:row="editTrack"
-    ></v-data-table>
+    >
+    </v-data-table>
     <TrackDialog
       :opened="dialogVisible"
       :track="selectedTrack"

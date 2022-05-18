@@ -1,18 +1,18 @@
 package com.lab4.demo.batch;
 
 
-import com.lab4.demo.track.model.TrackBatch;
+import com.lab4.demo.track.model.Track;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
-public class TrackBatchItemProcessor implements ItemProcessor<TrackBatch, TrackBatch> {
+public class TrackBatchItemProcessor implements ItemProcessor<Track, Track> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TrackBatchItemProcessor.class);
 
     @Override
-    public TrackBatch process(final TrackBatch trackBatch) throws Exception {
+    public Track process(final Track trackBatch) throws Exception {
         Long id = trackBatch.getId();
         System.out.println("Processing TrackBatch: " + id);
         String title = trackBatch.getTitle();
@@ -23,7 +23,7 @@ public class TrackBatchItemProcessor implements ItemProcessor<TrackBatch, TrackB
         String link =trackBatch.getLink();
         int duration = trackBatch.getDuration();
 
-        TrackBatch transformedTrackBatch = new TrackBatch(id, artist, album, duration, explicit_lyrics, preview, link, title);
+        Track transformedTrackBatch = new Track(id, artist, album, duration, explicit_lyrics, preview, link, title);
         LOGGER.info("Converting ( {} ) into ( {} )", trackBatch, transformedTrackBatch);
 
         return transformedTrackBatch;

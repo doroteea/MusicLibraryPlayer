@@ -12,6 +12,7 @@
         hide-details
       ></v-text-field>
       <v-btn @click="addPlaylist">Add Playlist</v-btn>
+      <v-btn @click="sendMail">Send confirmation email</v-btn>
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -56,6 +57,9 @@ export default {
     };
   },
   methods: {
+    sendMail() {
+      api.playlists.sendMail();
+    },
     addPlaylist() {
       this.dialogVisible = true;
     },
