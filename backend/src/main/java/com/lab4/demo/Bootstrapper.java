@@ -1,7 +1,5 @@
 package com.lab4.demo;
 
-import com.lab4.demo.book.BookRepository;
-import com.lab4.demo.book.model.Book;
 import com.lab4.demo.playlist.PlaylistRepository;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.security.AuthService;
@@ -32,7 +30,6 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
 
     private final AuthService authService;
 
-    private final BookRepository bookRepository;
 
     private final PlaylistRepository playlistRepository;
 
@@ -44,7 +41,6 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         if (bootstrap) {
-            bookRepository.deleteAll();
             userRepository.deleteAll();
             roleRepository.deleteAll();
             playlistRepository.deleteAll();
