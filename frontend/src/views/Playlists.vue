@@ -57,6 +57,9 @@ export default {
     };
   },
   methods: {
+    sendMail() {
+      api.playlists.sendMail();
+    },
     addPlaylist() {
       this.dialogVisible = true;
     },

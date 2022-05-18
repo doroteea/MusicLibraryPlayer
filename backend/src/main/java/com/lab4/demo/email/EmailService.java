@@ -40,5 +40,31 @@ public class EmailService {
         Transport.send(msg);
     }
 
-}
+    public void sendScheduledEmail(String email) throws MessagingException {
 
+        Properties props = new Properties();
+
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("musicplayerlibrary@gmail.com", "#123Password");
+            }
+        });
+
+        Message msg = new MimeMessage(session);
+
+        msg.setSubject("Welcome!");
+        msg.setContent("Don't forget to buy songs and give us money , peasant\n\nEnjoy our services☺!\n\n" ,"text/html");
+        msg.setFrom(new InternetAddress("musicplayerlibrary@gmail.com", false));
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+
+        msg.setSentDate(new Date());
+
+        Transport.send(msg);
+    }
+
+}

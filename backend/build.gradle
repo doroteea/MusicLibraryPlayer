@@ -83,6 +83,19 @@ dependencies {
     implementation 'org.mongodb:mongo-java-driver:3.12.11'
     implementation 'org.mongodb:mongodb-driver-sync:4.6.0'
 
+    // https://mvnrepository.com/artifact/org.hsqldb/hsqldb
+    testImplementation group: 'org.hsqldb', name: 'hsqldb', version: '2.6.1'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-batch
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-batch', version: '2.6.7'
+
+    // https://mvnrepository.com/artifact/org.hsqldb/hsqldb
+    testImplementation group: 'org.hsqldb', name: 'hsqldb', version: '2.0.0'
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.7'
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+
+
     //email
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.7'
     implementation 'javax.mail:javax.mail-api:1.6.2'
