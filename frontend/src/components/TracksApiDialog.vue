@@ -6,8 +6,7 @@
   >
     <template>
       <v-card>
-        <v-toolbar color="primary" dark>
-        </v-toolbar>
+        <v-toolbar color="primary" dark> </v-toolbar>
         <v-form>
           <v-text-field v-model="track.id" label="Playlist id" />
           <v-text-field v-model="comment.content" label="Content" />

@@ -1,6 +1,8 @@
 package com.lab4.demo.payment;
 
 import com.lab4.demo.payment.DTO.PaymentDTO;
+import com.lab4.demo.report.ReportServiceFactory;
+import com.lab4.demo.report.ReportType;
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
@@ -8,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.io.IOException;
 
 import static com.lab4.demo.UrlMapping.*;
 import static spark.Spark.port;
@@ -17,6 +21,8 @@ import static spark.Spark.post;
 @Transactional
 @RequiredArgsConstructor
 public class PaymentService {
+
+    private final ReportServiceFactory reportServiceFactory;
 
     public void createSession(PaymentDTO paymentDTO) {
         port(4242);
@@ -47,5 +53,9 @@ public class PaymentService {
             response.redirect(session.getUrl(), 303);
             return "";
         });
+    }
+
+    public String export(ReportType type, Long id) throws IOException {
+        return reportServiceFactory.getReportService(type).export(id);
     }
 }

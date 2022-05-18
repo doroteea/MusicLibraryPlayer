@@ -6,11 +6,15 @@
     </div>
     <div>
       <v-btn class="sr-only" @click="goBack">Finish</v-btn>
+      <v-btn @click="generatePDF">Download tracks PDF</v-btn>
+      <v-btn @click="generateCSV">Download tracks CSV</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import api from "../api";
+
 export default {
   name: "Success",
   props: ["baseURL"],
@@ -25,12 +29,18 @@ export default {
     goBack() {
       this.$router.push("/tracksApi");
     },
-  },
-  created() {
-    this.refreshList();
+    generatePDF() {
+      api.payment.generatePDF({
+        user_id: this.$store.getters["auth/getUserID"],
+      });
+    },
+    generateCSV() {
+      api.payment.generateCSV({
+        user_id: this.$store.getters["auth/getUserID"],
+      });
+    },
   },
   mounted() {
-    this.refreshList();
     this.token = localStorage.getItem("token");
     this.sessionId = localStorage.getItem("sessionId");
   },

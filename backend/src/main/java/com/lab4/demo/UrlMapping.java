@@ -24,4 +24,7 @@ public class UrlMapping {
     public static final String PAYMENT = API_PATH + "/payment";
     public static final String FAIL_PAYMENT = "http://localhost:8091"+"/payment/fail";
     public static final String SUCCESS_PAYMENT = "http://localhost:8091"+"payment/success";
+
+    public static final String EXPORT_REPORT = "/{type}/{id}";
+
 }

@@ -1,56 +1,71 @@
 package com.lab4.demo.report;
 
-import com.lab4.demo.book.BookRepository;
-import com.lab4.demo.book.model.Book;
-import com.lab4.demo.book.model.dto.BookDTO;
+import com.lab4.demo.track.model.Track;
+import com.lab4.demo.user.UserRepository;
+import com.lab4.demo.user.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import static com.lab4.demo.report.ReportType.PDF;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import static com.lab4.demo.report.ReportType.PDF;
 
 @RequiredArgsConstructor
 @Service
 public class PdfReportService implements ReportService {
 
-    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
+
     @Override
-    public String export() {
-        List<Book> booksOutOfStock = bookRepository
-                .findAll()
-                .stream()
-                .filter(book -> book.getQuantity() == 0)
-                .collect(Collectors.toList());
-        try (PDDocument doc = new PDDocument()) {
-            PDPage myPage = new PDPage();
-            doc.addPage(myPage);
+    public String export(Long id) throws IOException {
 
-            try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()) {
 
-                cont.beginText();
+            try (PDDocument doc = new PDDocument()) {
+                PDPage myPage = new PDPage();
+                doc.addPage(myPage);
 
-                cont.setFont(PDType1Font.TIMES_ROMAN, 12);
-                cont.setLeading(14.5f);
+                try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
 
-                cont.newLineAtOffset(25, 700);
+                    cont.beginText();
 
-                for (Book book : booksOutOfStock) {
-                    cont.showText(book.toString());
-                    cont.newLine();
+                    cont.setFont(PDType1Font.TIMES_ROMAN, 8);
+                    cont.setLeading(14.5f);
+
+                    cont.newLineAtOffset(25, 700);
+
+                    for (Track track: user.get().getPurchasedTracks()) {
+                        cont.showText("Id: " + track.getId().toString()
+                                + " Title: " + track.getTitle()
+                                + " Artist: " + track.getArtist()
+                                + " Link: " + track.getLink()
+                                + " Duration: " +track.getDuration()
+                                + " Album: " + track.getAlbum()
+                                + " Lyrics: " + track.getExplicit_lyrics());
+                        cont.newLine();
+                    }
+                    cont.endText();
                 }
-                cont.endText();
+
+                doc.save("src/main/resources/MyTracks.pdf");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            doc.save("src/main/resources/MyPdf.pdf");
-        } catch (IOException e) {
-            e.printStackTrace();
+            File file = new File("src/main/resources/MyTracks.pdf");
+            Resource resource = new UrlResource(file.toPath().toUri());
+            if (resource.exists() && resource.isReadable()) {
+                return resource.getFile().getAbsolutePath();
+            }
         }
         return "I am a PDF reporter.";
     }
