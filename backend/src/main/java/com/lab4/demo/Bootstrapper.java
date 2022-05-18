@@ -68,6 +68,12 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
                     .password("WooHoo1!")
                     .roles(Set.of("EMPLOYEE"))
                     .build());
+            authService.register(SignupRequest.builder()
+                    .email("sandordoroteea@gmail.com")
+                    .username("doro")
+                    .password("WooHoo1!")
+                    .roles(Set.of("EMPLOYEE"))
+                    .build());
 
             trackRepository.save(Track.builder()
                     .title("title song1")

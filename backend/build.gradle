@@ -82,6 +82,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.6.7'
     implementation 'org.mongodb:mongo-java-driver:3.12.11'
     implementation 'org.mongodb:mongodb-driver-sync:4.6.0'
+
+    //email
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.7'
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+
+    //sms
+    implementation group: 'com.twilio.sdk', name: 'twilio', version: '8.30.0'
 }
 
 test {

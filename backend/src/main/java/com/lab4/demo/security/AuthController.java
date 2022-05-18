@@ -1,9 +1,11 @@
 package com.lab4.demo.security;
 
+import com.lab4.demo.email.EmailService;
 import com.lab4.demo.security.dto.JwtResponse;
 import com.lab4.demo.security.dto.LoginRequest;
 import com.lab4.demo.security.dto.MessageResponse;
 import com.lab4.demo.security.dto.SignupRequest;
+import com.lab4.demo.sms.SMSService;
 import com.lab4.demo.user.dto.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +32,8 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final AuthService authService;
     private final JwtUtils jwtUtils;
+    private final EmailService emailService;
+    private final SMSService smsService;
 
     @PostMapping(SIGN_IN)
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -56,7 +61,7 @@ public class AuthController {
     }
 
     @PostMapping(SIGN_UP)
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws MessagingException {
         if (authService.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -70,8 +75,8 @@ public class AuthController {
         }
 
         authService.register(signUpRequest);
-
-
+        emailService.sendEmail(signUpRequest.getEmail());
+        smsService.send();
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 

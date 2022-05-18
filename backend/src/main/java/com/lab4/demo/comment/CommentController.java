@@ -4,19 +4,21 @@ import com.lab4.demo.comment.model.dto.CommentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
-import static com.lab4.demo.UrlMapping.*;
+import static com.lab4.demo.UrlMapping.COMMENTS;
+import static com.lab4.demo.UrlMapping.COMMENT_ID_PART;
 
 @RestController
 @RequestMapping(COMMENTS)
 @RequiredArgsConstructor
 public class CommentController {
-
     private final CommentService commentService;
 
     @GetMapping
-    public List<CommentDTO> allComments() {
+    public List<CommentDTO> allComments() throws IOException, MessagingException {
         return commentService.findAll();
     }
 
