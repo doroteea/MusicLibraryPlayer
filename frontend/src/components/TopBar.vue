@@ -6,6 +6,7 @@
       <v-btn @click="goToTracks">Tracks</v-btn>
       <v-btn @click="goToPlaylists">Playlists</v-btn>
       <v-btn @click="goToTracksApi">Tracks Api</v-btn>
+      <v-btn @click="goToComments">Comments</v-btn>
       <v-btn icon @click="logout">
         <v-icon>logout</v-icon>
       </v-btn>
@@ -31,6 +32,9 @@ export default {
     },
     goToPlaylists() {
       this.$router.push("/playlists");
+    },
+    goToComments() {
+      this.$router.push("/comments");
     },
   },
 };

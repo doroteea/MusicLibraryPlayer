@@ -2,6 +2,7 @@ package com.lab4.demo.track;
 
 import com.lab4.demo.BaseControllerTest;
 import com.lab4.demo.TestCreationFactory;
+import com.lab4.demo.comment.CommentService;
 import com.lab4.demo.playlist.PlaylistService;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.model.Track;
@@ -34,10 +35,13 @@ class TrackApiControllerTest extends BaseControllerTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private CommentService commentService;
+
     @BeforeEach
     protected void setUp() {
         super.setUp();
-        trackApiController = new TrackApiController(playlistService,userService);
+        trackApiController = new TrackApiController(playlistService,userService,commentService);
         mockMvc = MockMvcBuilders.standaloneSetup(trackApiController).build();
     }
 

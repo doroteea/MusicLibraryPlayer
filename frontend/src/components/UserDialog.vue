@@ -21,9 +21,10 @@
           <v-btn @click="deleteUser">Delete user</v-btn>
         </v-card-actions>
         <v-spacer></v-spacer>
-        <v-data-table :headers="headers" :items="user.tracks"> </v-data-table>
+        <v-data-table :headers="headers" :items="user.purchasedTracks">
+        </v-data-table>
         <v-spacer></v-spacer>
-        <v-data-table :headers="headers2" :items="user.playlists">
+        <v-data-table :headers="headers2" :items="user.playlistList">
         </v-data-table>
       </v-card>
     </template>
@@ -79,6 +80,8 @@ export default {
             name: this.user.username,
             password: this.user.password,
             email: this.user.email,
+            purchasedTracks: this.user.purchasedTracks,
+            playlistList: this.user.playlistList,
           })
           .catch((err) => {
             alert(err.response.data.message);
@@ -93,6 +96,8 @@ export default {
             name: this.user.username,
             password: this.user.password,
             email: this.user.email,
+            purchasedTracks: this.user.purchasedTracks,
+            playlistList: this.user.playlistList,
           })
           .then(() => this.$emit("refresh"));
       }

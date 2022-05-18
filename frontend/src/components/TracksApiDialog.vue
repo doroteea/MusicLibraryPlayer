@@ -7,13 +7,14 @@
     <template>
       <v-card>
         <v-toolbar color="primary" dark>
-          {{ isNew ? "Create playlist" : "Edit playlist" }}
         </v-toolbar>
         <v-form>
           <v-text-field v-model="track.id" label="Playlist id" />
+          <v-text-field v-model="comment.content" label="Content" />
         </v-form>
         <v-card-actions>
           <v-btn @click="addToPlaylist">Add to playlist</v-btn>
+          <v-btn @click="addComment">Add comment</v-btn>
         </v-card-actions>
         <div>
           <stripe-checkout
@@ -56,6 +57,8 @@ export default {
       ],
       successURL: "http://localhost:8091/#/payment/success",
       cancelURL: "http://localhost:8091/#/payment/fail",
+
+      comment: [],
     };
   },
   methods: {
@@ -90,6 +93,15 @@ export default {
     submit() {
       this.purchaseTrack();
       this.$refs.checkoutRef.redirectToCheckout();
+    },
+    addComment() {
+      api.tracksApi
+        .addComment({
+          content: this.comment.content,
+          trackId: this.track.id,
+          userId: this.$store.getters["auth/getUserID"],
+        })
+        .then(() => this.$emit("refresh"));
     },
   },
 };

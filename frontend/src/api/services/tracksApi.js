@@ -22,4 +22,13 @@ export default {
       return response.data;
     });
   },
+  addComment(comment) {
+    return HTTP.put(
+      BASE_URL + "/tracksAPI/" + comment.trackId + "/comments",
+      comment,
+      { headers: authHeader() }
+    ).then((response) => {
+      return response.data;
+    });
+  },
 };

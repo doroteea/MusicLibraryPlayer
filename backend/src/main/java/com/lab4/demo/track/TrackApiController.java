@@ -1,5 +1,7 @@
 package com.lab4.demo.track;
 
+import com.lab4.demo.comment.CommentService;
+import com.lab4.demo.comment.model.dto.CommentDTO;
 import com.lab4.demo.playlist.PlaylistService;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.model.dto.TrackDTO;
@@ -27,6 +29,7 @@ public class TrackApiController {
 
     private final PlaylistService playlistService;
     private final UserService userService;
+    private final CommentService commentService;
 
     private List<TrackDTO> searchTracks(){
         HttpResponse<String> response = Unirest.get("https://deezerdevs-deezer.p.rapidapi.com/playlist/3155776842")
@@ -71,6 +74,11 @@ public class TrackApiController {
     @PutMapping(BUY_TRACK)
     public UserListDTO purchase(@PathVariable Long id, @RequestBody TrackDTO track) throws UserNotFoundException {
         return userService.buyTrack(id,track);
+    }
+
+    @PutMapping(TRACK_ID_PART+"/comments")
+    public CommentDTO createComment(@RequestBody CommentDTO comment){
+        return commentService.save(comment);
     }
 
     //    public List<TrackDTO> searchTracks(String query){
