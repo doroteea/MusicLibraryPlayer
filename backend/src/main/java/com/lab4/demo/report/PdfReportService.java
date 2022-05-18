@@ -73,6 +73,5 @@ public class PdfReportService implements ReportService {
     @Override
     public ReportType getType() {
         return PDF;
-        //return null;
     }
 }
