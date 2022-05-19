@@ -68,6 +68,8 @@
 
 <script>
 import router from "../router";
+import SockJS from "sockjs-client";
+import Stomp from "webstomp-client";
 
 export default {
   name: "MusicPlayer",
@@ -81,9 +83,24 @@ export default {
     },
   }),
   methods: {
+    sendMessage(username) {
+      this.socket = new SockJS("http://localhost:8088/gs-guide-websocket");
+      this.stompClient = Stomp.over(this.socket);
+      this.stompClient.connect({}, () => {
+        console.log("here bro");
+        if (this.stompClient && this.stompClient.connected) {
+          const msg = { name: username };
+          console.log(JSON.stringify(msg));
+          this.stompClient.send("/app/hello", JSON.stringify(msg), {});
+        }
+      });
+    },
+
     attemptLogin() {
       this.$store.dispatch("auth/login", this.login).then(() => {
         if (this.$store.state.auth.status.loggedIn) {
+          this.sendMessage(this.login.username);
+
           if (this.$store.getters["auth/isAdmin"]) {
             router.push("/users");
           } else {

@@ -8,6 +8,11 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+import $ from "jquery";
+window.jQuery = window.$ = $;
+require("bootstrap/dist/css/bootstrap.min.css");
+require("bootstrap/dist/js/bootstrap.min.js");
+
 new Vue({
   router,
   vuetify,
