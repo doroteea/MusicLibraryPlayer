@@ -10,13 +10,27 @@ import Payment from "../views/Payment";
 import PaymentSuccess from "../views/PaymentSuccess";
 import PaymentFail from "../views/PaymentFail";
 import Comments from "../views/Comments";
+import WebSocketGreeting from "../components/WebSocketGreeting";
 Vue.use(VueRouter);
+
 
 const routes = [
   {
     path: "/",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/topic/greetings",
+    name: "WebSocketGreeting",
+    component: WebSocketGreeting,
+    beforeEnter: (to, from, next) => {
+      if (store.state.status.loggedIn) {
+        next();
+      } else {
+        next({ name: "Home" });
+      }
+    },
   },
   {
     path: "/users",

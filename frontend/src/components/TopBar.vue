@@ -7,6 +7,7 @@
       <v-btn @click="goToPlaylists">Playlists</v-btn>
       <v-btn @click="goToTracksApi">Tracks Api</v-btn>
       <v-btn @click="goToComments">Comments</v-btn>
+      <v-btn @click="goToGreetings">Greetings</v-btn>
       <v-btn icon @click="logout">
         <v-icon>logout</v-icon>
       </v-btn>
@@ -16,7 +17,6 @@
 
 <script>
 import router from "../router";
-
 export default {
   name: "TopBar",
   methods: {
@@ -36,6 +36,9 @@ export default {
     goToComments() {
       this.$router.push("/comments");
     },
+    goToGreetings(){
+      this.$router.push("/topic/greetings");
+    }
   },
 };
 </script>
