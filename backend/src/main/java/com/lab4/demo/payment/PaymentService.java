@@ -1,6 +1,6 @@
 package com.lab4.demo.payment;
 
-import com.lab4.demo.payment.DTO.PaymentDTO;
+import com.lab4.demo.payment.model.DTO.PaymentDTO;
 import com.lab4.demo.report.ReportServiceFactory;
 import com.lab4.demo.report.ReportType;
 import com.stripe.Stripe;
@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.lab4.demo.UrlMapping.*;
 import static spark.Spark.port;
@@ -23,6 +25,8 @@ import static spark.Spark.post;
 public class PaymentService {
 
     private final ReportServiceFactory reportServiceFactory;
+    private final PaymentMapper paymentMapper;
+    private final PaymentRepository paymentRepository;
 
     public void createSession(PaymentDTO paymentDTO) {
         port(4242);
@@ -57,5 +61,17 @@ public class PaymentService {
 
     public String export(ReportType type, Long id) throws IOException {
         return reportServiceFactory.getReportService(type).export(id);
+    }
+
+    public List<PaymentDTO> findAll(){
+         return paymentRepository
+                .findAll()
+                .stream()
+                .map(paymentMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public PaymentDTO savePayment(PaymentDTO paymentDTO){
+        return paymentMapper.toDto(paymentRepository.save(paymentMapper.fromDto(paymentDTO)));
     }
 }

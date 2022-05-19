@@ -8,6 +8,21 @@ export default {
       return response.data;
     });
   },
+  findAll() {
+    console.log("here");
+    return HTTP.get(BASE_URL + "/payment", { headers: authHeader() }).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  },
+  save(payment) {
+    return HTTP.post(BASE_URL + "/payment", payment, {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
+  },
   generatePDF(payment) {
     return HTTP.get(BASE_URL + "/payment/PDF/" + payment.user_id, {
       responseType: "arraybuffer",

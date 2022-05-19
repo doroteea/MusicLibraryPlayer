@@ -22,9 +22,9 @@ public class PlaylistController {
     private final UserService userService;
     private final PlaylistService playlistService;
 
-    @GetMapping
-    public List<PlaylistDTO> getAllPlaylists(){
-        return playlistService.findAll();
+    @GetMapping(PLAYLIST_ID_PART)
+    public List<PlaylistDTO> getAllPlaylists(@PathVariable Long id){
+        return playlistService.findAll(id);
     }
 
     @PutMapping(ADD_PLAYLIST)

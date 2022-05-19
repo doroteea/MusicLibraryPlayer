@@ -102,6 +102,7 @@ dependencies {
 
     //sms
     implementation group: 'com.twilio.sdk', name: 'twilio', version: '8.30.0'
+    implementation 'junit:junit:4.12'
 }
 
 test {

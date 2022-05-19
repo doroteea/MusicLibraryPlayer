@@ -1,5 +1,6 @@
 package com.lab4.demo;
 
+import com.lab4.demo.payment.PaymentRepository;
 import com.lab4.demo.playlist.PlaylistRepository;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.security.AuthService;
@@ -35,6 +36,8 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
 
     private final TrackRepository trackRepository;
 
+    private final PaymentRepository paymentRepository;
+
     @Value("${app.bootstrap}")
     private Boolean bootstrap;
 
@@ -44,6 +47,7 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
             userRepository.deleteAll();
             roleRepository.deleteAll();
             playlistRepository.deleteAll();
+            paymentRepository.deleteAll();
             //trackRepository.deleteAll();
             for (ERole value : ERole.values()) {
                 roleRepository.save(

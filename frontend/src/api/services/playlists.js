@@ -1,12 +1,12 @@
 import authHeader, { BASE_URL, HTTP } from "../http";
 
 export default {
-  allPlaylists() {
-    return HTTP.get(BASE_URL + "/playlists", { headers: authHeader() }).then(
-      (response) => {
-        return response.data;
-      }
-    );
+  allPlaylists(playlist) {
+    return HTTP.get(BASE_URL + "/playlists/" + playlist.id, {
+      headers: authHeader(),
+    }).then((response) => {
+      return response.data;
+    });
   },
   create(playlist) {
     return HTTP.put(BASE_URL + "/playlists/create/" + playlist.id, playlist, {

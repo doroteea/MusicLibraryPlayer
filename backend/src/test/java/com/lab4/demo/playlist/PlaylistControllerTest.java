@@ -48,9 +48,9 @@ class PlaylistControllerTest extends BaseControllerTest {
     @Test
     void getAllPlaylists() throws Exception {
         List<PlaylistDTO> playlistDTOS = TestCreationFactory.listOf(Playlist.class);
-        when(playlistService.findAll()).thenReturn(playlistDTOS);
+        when(playlistService.findAll(1L)).thenReturn(playlistDTOS);
 
-        ResultActions response = performGet(PLAYLIST);
+        ResultActions response = performGetWithPathVariable(PLAYLIST + PLAYLIST_ID_PART,1L);
 
         response.andExpect(status().isOk())
                 .andExpect(jsonContentToBe(playlistDTOS));

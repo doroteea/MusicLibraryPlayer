@@ -1,7 +1,6 @@
 package com.lab4.demo;
 
-import com.lab4.demo.book.model.Book;
-import com.lab4.demo.book.model.dto.BookDTO;
+import com.lab4.demo.payment.model.Payment;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.track.model.Track;
 import com.lab4.demo.track.model.dto.TrackDTO;
@@ -30,16 +29,14 @@ public class TestCreationFactory {
 
         if (cls.equals(UserListDTO.class)) {
             supplier = TestCreationFactory::newUserListDTO;
-        } else if (cls.equals(Book.class)) {
-            supplier = TestCreationFactory::newBook;
-        } else if (cls.equals(BookDTO.class)) {
-            supplier = TestCreationFactory::newBookDTO;
         } else if (cls.equals(Playlist.class)){
             supplier = TestCreationFactory::newPlaylist;
         } else if (cls.equals(Track.class)){
             supplier = TestCreationFactory::newTrack;
         } else if (cls.equals(TrackDTO .class)){
             supplier = TestCreationFactory::newTrackDTO;
+        } else if (cls.equals(Payment.class)){
+            supplier = TestCreationFactory::newPayment;
         }
         else {
             supplier = () -> new String("You failed.");
@@ -57,6 +54,15 @@ public class TestCreationFactory {
                 .id(randomLong())
                 .name(randomString())
                 .email(randomEmail())
+                .build();
+    }
+
+    private static Payment newPayment(){
+        return  Payment.builder()
+                .id(randomLong())
+                .name(randomString())
+                .track_id(randomLong())
+                .user_id(randomLong())
                 .build();
     }
 
@@ -92,28 +98,6 @@ public class TestCreationFactory {
                 .link(randomString())
                 .preview(randomString())
                 .title(randomString())
-                .build();
-    }
-
-    private static Book newBook() {
-        return Book.builder()
-                .id(randomLong())
-                .title(randomString())
-                .author(randomString())
-                .genre(randomString())
-                .quantity(randomInt())
-                .price(randomDouble())
-                .build();
-    }
-
-    private static BookDTO newBookDTO() {
-        return BookDTO.builder()
-                .id(randomLong())
-                .title(randomString())
-                .author(randomString())
-                .genre(randomString())
-                .quantity(randomInt())
-                .price(randomDouble())
                 .build();
     }
 

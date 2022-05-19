@@ -60,23 +60,15 @@ export default {
       this.dialogVisible = true;
     },
     editPlaylist(playlist) {
-      if (
-        this.selectedPlaylist.userId !== this.$store.getters["auth/getUserID"]
-      ) {
-        this.showAlert = true;
-        this.errors =
-          "You can't edit or delete the comment because you did not add it!☺";
-      } else {
-        this.showAlert = false;
-        this.dialogVisible = true;
-      }
       this.selectedPlaylist = playlist;
       this.dialogVisible = true;
     },
     async refreshList() {
       this.dialogVisible = false;
       this.selectedPlaylist = {};
-      this.playlists = await api.playlists.allPlaylists();
+      this.playlists = await api.playlists.allPlaylists({
+        id: this.$store.getters["auth/getUserID"],
+      });
     },
   },
   created() {

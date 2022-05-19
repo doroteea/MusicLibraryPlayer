@@ -13,7 +13,6 @@ import Comments from "../views/Comments";
 import WebSocketGreeting from "../components/WebSocketGreeting";
 Vue.use(VueRouter);
 
-
 const routes = [
   {
     path: "/",

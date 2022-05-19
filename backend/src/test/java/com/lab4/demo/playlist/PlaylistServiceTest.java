@@ -8,6 +8,8 @@ import com.lab4.demo.track.TrackService;
 import com.lab4.demo.track.model.Track;
 import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.UserRepository;
+import com.lab4.demo.user.dto.UserListDTO;
+import com.lab4.demo.user.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,10 +51,36 @@ class PlaylistServiceTest {
 
     @Test
     void findAll() {
-        List<Playlist> playlists = TestCreationFactory.listOf(Playlist.class);
+        PlaylistDTO playlistDTO = PlaylistDTO.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+
+        Playlist playlist = Playlist.builder()
+                .id(1L)
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+
+        List<Playlist> playlists = new ArrayList<>();
+        playlists.add(playlist);
+
+
+        User user = User.builder()
+                .email("ana@gmail.com")
+                .password("sdfsg")
+                .username("dasfdsv")
+                .playlistList(playlists)
+                .build();
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(playlistMapper.toDTO(playlist)).thenReturn(playlistDTO);
         when(playlistRepository.findAll()).thenReturn(playlists);
 
-        List<PlaylistDTO> all = playlistService.findAll();
+        List<PlaylistDTO> all = playlistService.findAll(1L);
 
         Assertions.assertEquals(playlists.size(), all.size());
     }

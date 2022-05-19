@@ -58,6 +58,7 @@ export default {
       cancelURL: "http://localhost:8091/#/payment/fail",
 
       comment: [],
+      payment: [],
     };
   },
   methods: {
@@ -75,6 +76,13 @@ export default {
         })
         .then(() => this.$emit("refresh"));
     },
+    save() {
+      api.payment.save({
+        name: this.track.title,
+        user_id: this.$store.getters["auth/getUserID"],
+        track_id: this.track.id,
+      });
+    },
     purchaseTrack() {
       api.tracksApi
         .purchaseTrack({
@@ -90,6 +98,7 @@ export default {
         .then(() => this.$emit("refresh"));
     },
     submit() {
+      this.save();
       this.purchaseTrack();
       this.$refs.checkoutRef.redirectToCheckout();
     },

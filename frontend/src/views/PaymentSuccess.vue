@@ -1,15 +1,21 @@
 <template>
-  <div class="text-center">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
+  <v-card>
+    <div class="text-center">
       <span class="sr-only">Payment successful...</span>
+
+      <div>
+        <v-btn class="sr-only" @click="goBack">Finish</v-btn>
+        <v-btn @click="generatePDF">Download tracks PDF</v-btn>
+        <v-btn @click="generateCSV">Download tracks CSV</v-btn>
+      </div>
     </div>
-    <div>
-      <v-btn class="sr-only" @click="goBack">Finish</v-btn>
-      <v-btn @click="generatePDF">Download tracks PDF</v-btn>
-      <v-btn @click="generateCSV">Download tracks CSV</v-btn>
-    </div>
-  </div>
+
+    <v-card-title>
+      Payments
+      <v-spacer></v-spacer>
+    </v-card-title>
+    <v-data-table :headers="headers" :items="payments"></v-data-table>
+  </v-card>
 </template>
 
 <script>
@@ -22,7 +28,17 @@ export default {
     return {
       token: null,
       sessionId: null,
-      payment: [],
+      payments: [],
+      headers: [
+        {
+          text: "Name",
+          align: "start",
+          sortable: false,
+          value: "name",
+        },
+        { text: "User id", value: "user_id" },
+        { text: "Track id", value: "track_id" },
+      ],
     };
   },
   methods: {
@@ -39,10 +55,17 @@ export default {
         user_id: this.$store.getters["auth/getUserID"],
       });
     },
+    async refreshList() {
+      this.payments = await api.payment.findAll();
+    },
   },
   mounted() {
     this.token = localStorage.getItem("token");
     this.sessionId = localStorage.getItem("sessionId");
+    this.refreshList();
+  },
+  created() {
+    this.refreshList();
   },
 };
 </script>

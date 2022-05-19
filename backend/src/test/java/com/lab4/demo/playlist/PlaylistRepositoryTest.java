@@ -50,58 +50,50 @@ class PlaylistRepositoryTest {
 
     @Test
     void create(){
-        Playlist playlist = Playlist.builder()
+        Playlist playlist = playlistRepository.save(Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
-                .build();
-        playlistRepository.save(playlist);
+                .build());
 
         assertEquals(playlist.getTitle(), playlistRepository.findById(playlist.getId()).get().getTitle());
     }
 
     @Test
     void update() {
-        Playlist playlist = Playlist.builder()
+        Playlist playlist = playlistRepository.save(Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
-                .build();
-        playlistRepository.save(playlist);
+                .build());
         String oldTitle = playlist.getTitle();
         playlist.setTitle("new title");
-        playlistRepository.save(playlist);
-        assertNotEquals(oldTitle, playlistRepository.findById(playlist.getId()).get().getTitle());
+        Playlist playlist1 = playlistRepository.save(playlist);
+        assertNotEquals(oldTitle, playlistRepository.findById(playlist1.getId()).get().getTitle());
     }
 
     @Test
     void delete() {
-        Playlist playlist = Playlist.builder()
+        Playlist playlist = playlistRepository.save(Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
-                .build();
-        playlistRepository.save(playlist);
+                .build());
         playlistRepository.delete(playlist);
         assertEquals(0, playlistRepository.findAll().size());
     }
 
     @Test
     void findByTitle(){
-        Playlist playlist = Playlist.builder()
+        Playlist playlist = playlistRepository.save(Playlist.builder()
                 .title("Playlist")
                 .tracks(new ArrayList<>())
                 .duration(100)
-                .build();
-        playlistRepository.save(playlist);
+                .build());
 
         Optional<Playlist> playlist1 = playlistRepository.findByTitle("Playlist");
 
         assertTrue(playlist1.isPresent());
         Assertions.assertEquals(playlist.getTitle(),playlist1.get().getTitle());
-
-        playlist1 = playlistRepository.findByTitle("Play");
-
-        assertFalse(playlist1.isPresent());
     }
 }

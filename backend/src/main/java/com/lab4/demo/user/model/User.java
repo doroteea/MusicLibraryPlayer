@@ -1,13 +1,13 @@
 package com.lab4.demo.user.model;
 
+import com.lab4.demo.payment.model.Payment;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.track.model.Track;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.hibernate.annotations.OnDeleteAction.CASCADE;
 
 @Entity
 @Table(
@@ -47,6 +49,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @Builder.Default
+    @OnDelete(action = CASCADE)
     private Set<Role> roles = new HashSet<>();
 
     //considering each user has private playlists
@@ -57,10 +60,17 @@ public class User {
     @Builder.Default
     private List<Playlist> playlistList = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_tracks",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "track_id"))
     @Builder.Default
     private Set<Track> purchasedTracks = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_payments",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_id"))
+    @Builder.Default
+    private Set<Payment> payments = new HashSet<>();
 }

@@ -62,6 +62,12 @@ public abstract class BaseControllerTest {
                 .accept(MediaType.APPLICATION_JSON));
     }
 
+    protected ResultActions performGetWith2PathVariables(String path,Object... pathVariables) throws Exception {
+        return mockMvc.perform(get(path,pathVariables)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+    }
+
 
     protected ResultActions performPutWithRequestBodyAndPathVariables(String path, Object body, Object... pathVariables) throws Exception {
         return mockMvc.perform(put(path, pathVariables)

@@ -1,9 +1,11 @@
 package com.lab4.demo.playlist;
 
-import com.lab4.demo.TestCreationFactory;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.model.dto.TrackDTO;
+import com.lab4.demo.user.UserNotFoundException;
+import com.lab4.demo.user.UserService;
+import com.lab4.demo.user.dto.UserListDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,9 @@ public class PlaylistServiceIntegrationTest {
     private PlaylistService playlistService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private PlaylistRepository playlistRepository;
 
     @BeforeEach
@@ -28,13 +33,25 @@ public class PlaylistServiceIntegrationTest {
     }
 
     @Test
-    void findAll() {
-        List<Playlist> playlists = TestCreationFactory.listOf(Playlist.class);
-        playlistRepository.saveAll(playlists);
+    void findAll() throws UserNotFoundException {
+        UserListDTO userListDTO = userService.createUser(UserListDTO.builder()
+            .email("ana@gmail.com")
+            .password("sdfsg")
+            .name("dasfdsv").build());
+        //List<Playlist> playlists = TestCreationFactory.listOf(Playlist.class);
 
-        List<PlaylistDTO> all = playlistService.findAll();
+        PlaylistDTO playlist =  PlaylistDTO.builder()
+                .title("Playlist")
+                .tracks(new ArrayList<>())
+                .duration(100)
+                .build();
+        UserListDTO userListDTO1 = userService.createPlaylist(userListDTO.getId(),playlist);
+        //playlistRepository.saveAll(playlists);
 
-        Assertions.assertEquals(playlists.size(), all.size());
+        List<PlaylistDTO> all = playlistService.findAll(userListDTO.getId());
+
+        Assertions.assertEquals(1, all.size());
+        userService.deleteUser(userListDTO.getId());
     }
 
     @Test
@@ -57,10 +74,10 @@ public class PlaylistServiceIntegrationTest {
                 .tracks(new ArrayList<>())
                 .duration(100)
                 .build();
-        PlaylistDTO resItem = playlistService.create(playlist);
+        PlaylistDTO playlistDTO = playlistService.create(playlist);
 
-        Assertions.assertNotNull(resItem);
-        Assertions.assertEquals(playlist.getTitle(),resItem.getTitle());
+        Assertions.assertNotNull(playlistDTO);
+        Assertions.assertEquals(playlist.getTitle(),playlistDTO.getTitle());
     }
 
     @Test
@@ -93,7 +110,7 @@ public class PlaylistServiceIntegrationTest {
         PlaylistDTO PlaylistDTO =  playlistService.create(playlist);
 
         playlistService.delete(PlaylistDTO.getId());
-        List<PlaylistDTO> all = playlistService.findAll();
+        List<PlaylistDTO> all = playlistService.findAll(1L);
 
         Assertions.assertEquals(0, all.size());
     }

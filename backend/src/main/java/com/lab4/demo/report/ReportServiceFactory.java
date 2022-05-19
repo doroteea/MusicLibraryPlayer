@@ -19,6 +19,4 @@ public class ReportServiceFactory {
     public ReportService getReportService(ReportType type) {
         return reportServices.get(type);
     }
-
-
 }

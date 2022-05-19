@@ -1,4 +1,4 @@
-package com.lab4.demo.payment.DTO;
+package com.lab4.demo.payment.model.DTO;
 
 import lombok.*;
 
@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class PaymentDTO {
 
+    private Long id;
     private String name;
     private Long user_id;
     private Long track_id;

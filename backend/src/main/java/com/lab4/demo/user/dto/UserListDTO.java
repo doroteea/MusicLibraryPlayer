@@ -1,5 +1,7 @@
 package com.lab4.demo.user.dto;
 
+import com.lab4.demo.payment.model.DTO.PaymentDTO;
+import com.lab4.demo.payment.model.Payment;
 import com.lab4.demo.playlist.model.Playlist;
 import com.lab4.demo.playlist.model.dto.PlaylistDTO;
 import com.lab4.demo.track.model.Track;
@@ -38,5 +40,7 @@ public class UserListDTO extends UserMinimalDTO {
     private List<PlaylistDTO> playlistList;
 
     private List<TrackDTO> purchasedTracks;
+
+    private List<PaymentDTO> payments;
 
 }

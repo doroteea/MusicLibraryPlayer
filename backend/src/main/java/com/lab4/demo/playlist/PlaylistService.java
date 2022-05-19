@@ -29,10 +29,15 @@ public class PlaylistService {
                 .orElseThrow(() -> new EntityNotFoundException("Playlist not found: " + id));
     }
 
-    public List<PlaylistDTO> findAll() {
-        return playlistRepository.findAll().stream()
-                .map(playlistMapper::toDTO)
-                .collect(Collectors.toList());
+    public List<PlaylistDTO> findAll(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        List<PlaylistDTO> playlistDTOS = new ArrayList<>();
+        if(user.isPresent()) {
+            for (Playlist playlist : user.get().getPlaylistList()) {
+                playlistDTOS.add(playlistMapper.toDTO(playlist));
+            }
+        }
+        return playlistDTOS;
     }
 
     public PlaylistDTO create(PlaylistDTO playlistDTO) {

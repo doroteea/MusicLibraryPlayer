@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+
 import static com.lab4.demo.report.ReportType.CSV;
 import static com.lab4.demo.report.ReportType.PDF;
 
@@ -15,11 +17,11 @@ class ReportServiceFactoryTest {
     private ReportServiceFactory reportServiceFactory;
 
     @Test
-    void getReportService() {
+    void getReportService() throws IOException {
         ReportService csvReportService = reportServiceFactory.getReportService(CSV);
-        Assertions.assertEquals("I am a CSV reporter.", csvReportService.export());
+        Assertions.assertEquals("I am a CSV reporter.", csvReportService.export(1L));
 
         ReportService pdfReportService = reportServiceFactory.getReportService(PDF);
-        Assertions.assertEquals("I am a PDF reporter.", pdfReportService.export());
+        Assertions.assertEquals("I am a PDF reporter.", pdfReportService.export(1L));
     }
 }
