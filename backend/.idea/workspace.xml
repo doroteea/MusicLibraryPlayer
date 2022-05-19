@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3184db65-d2ad-4daf-bb3e-a50f3142dbf4" name="Changes" comment="db migration change column and change it back working">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Album.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Albums.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artist.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artists.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/deezer/DeezerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/TestCreationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/TestCreationFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/deezer/DeezerControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/report/ReportServiceFactoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceTest.java" afterDir="false" />
+    <list default="true" id="3184db65-d2ad-4daf-bb3e-a50f3142dbf4" name="Changes" comment="plw?">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/BatchConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/BatchConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Book1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Tracks.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +55,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -210,8 +209,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.Tests in 'demo.test'" />
-        <item itemvalue="Gradle.UserControllerTest" />
         <item itemvalue="Spring Boot.DemoApplication" />
+        <item itemvalue="Gradle.UserControllerTest" />
         <item itemvalue="Gradle.backend [flywayMigrate]" />
         <item itemvalue="Gradle.backend [flywayBaseline]" />
       </list>
@@ -225,7 +224,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1652996361290</updated>
-      <workItem from="1652996362578" duration="1284000" />
+      <workItem from="1652996362578" duration="2222000" />
     </task>
     <task id="LOCAL-00001" summary="db migration pt1">
       <created>1652997178847</created>
@@ -241,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652997352845</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="plw?">
+      <created>1652997861203</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1652997861203</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,9 +267,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="db migration pt1" />
     <MESSAGE value="db migration change column and change it back working" />
-    <option name="LAST_COMMIT_MESSAGE" value="db migration change column and change it back working" />
+    <MESSAGE value="plw?" />
+    <option name="LAST_COMMIT_MESSAGE" value="plw?" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/demo$Tests_in__demo_test_.ic" NAME="Tests in 'demo.test' Coverage Results" MODIFIED="1652997620309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/demo$Tests_in__demo_test_.ic" NAME="Tests in 'demo.test' Coverage Results" MODIFIED="1652998223995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

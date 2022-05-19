@@ -39,7 +39,7 @@ public class BatchConfiguration {
 public FlatFileItemReader<Track> reader() {
     return new FlatFileItemReaderBuilder<Track>()
             .name("TrackBatchItemReader")
-            .resource(new ClassPathResource("Book1.csv"))
+            .resource(new ClassPathResource("Tracks.csv"))
             .delimited()
             .names("id", "artist", "album", "duration", "explicit_lyrics", "link","preview", "title")
             .fieldSetMapper(new BeanWrapperFieldSetMapper<Track>() {{
