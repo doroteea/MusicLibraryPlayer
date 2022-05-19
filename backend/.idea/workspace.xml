@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3184db65-d2ad-4daf-bb3e-a50f3142dbf4" name="Changes" comment="db migration pt1">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.2__change_column_url_to_link.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/TrackBatchItemProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/TrackBatchItemProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/model/Track.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/model/Track.java" afterDir="false" />
+    <list default="true" id="3184db65-d2ad-4daf-bb3e-a50f3142dbf4" name="Changes" comment="db migration change column and change it back working">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Album.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Albums.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artists.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/deezer/DeezerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/TestCreationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/TestCreationFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/deezer/DeezerControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/report/ReportServiceFactoryTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +92,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -97,7 +109,49 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Gradle.backend [flywayMigrate]">
+  <component name="RunManager" selected="Gradle.Tests in 'demo.test'">
+    <configuration name="Tests in 'demo.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests *" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.lab4.demo.user.UserControllerTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="backend [flywayBaseline]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -155,9 +209,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Tests in 'demo.test'" />
+        <item itemvalue="Gradle.UserControllerTest" />
+        <item itemvalue="Spring Boot.DemoApplication" />
         <item itemvalue="Gradle.backend [flywayMigrate]" />
         <item itemvalue="Gradle.backend [flywayBaseline]" />
-        <item itemvalue="Spring Boot.DemoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -169,7 +225,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1652996361290</updated>
-      <workItem from="1652996362578" duration="907000" />
+      <workItem from="1652996362578" duration="1284000" />
     </task>
     <task id="LOCAL-00001" summary="db migration pt1">
       <created>1652997178847</created>
@@ -178,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652997178847</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="db migration change column and change it back working">
+      <created>1652997352845</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652997352845</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +260,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="db migration pt1" />
-    <option name="LAST_COMMIT_MESSAGE" value="db migration pt1" />
+    <MESSAGE value="db migration change column and change it back working" />
+    <option name="LAST_COMMIT_MESSAGE" value="db migration change column and change it back working" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/demo$Tests_in__demo_test_.ic" NAME="Tests in 'demo.test' Coverage Results" MODIFIED="1652997620309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
