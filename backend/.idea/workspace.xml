@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3184db65-d2ad-4daf-bb3e-a50f3142dbf4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.0__init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/Bootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/Bootstrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/DemoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/UrlMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/UrlMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Album.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Albums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/album/Albums.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/artist/Artists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/BatchConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/BatchConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/JobCompletionNotificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/JobCompletionNotificationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/TrackBatchItemProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/batch/TrackBatchItemProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/DocumentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/DocumentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/MongoJavaDriverSampleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/MongoJavaDriverSampleApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/model/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/model/dto/CommentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/model/dto/CommentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/mongoDatabase/MongoDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/comment/mongoDatabase/MongoDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/cronJobs/SchedulerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/cronJobs/SchedulerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/deezer/DeezerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/deezer/DeezerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/email/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/email/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/payment/DTO/PaymentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/payment/DTO/PaymentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/payment/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/payment/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/payment/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/payment/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/PlaylistService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/model/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/model/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/model/dto/PlaylistDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/playlist/model/dto/PlaylistDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthEntryPointJwt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthEntryPointJwt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/AuthTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/JwtResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/MessageResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/MessageResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/SignupRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/security/dto/SignupRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/TrackService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/model/Track.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/model/Track.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/model/dto/TrackDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/track/model/dto/TrackDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/dto/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/dto/UserDetailsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/dto/UserListDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/dto/UserListDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/dto/UserMinimalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/dto/UserMinimalDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/model/ERole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/model/ERole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/user/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/Greeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/Greeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/HelloMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/HelloMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/WebsocketConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/WebsocketConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/WebsocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lab4/demo/websocket/WebsocketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Book1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Book1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema-all.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema-all.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/BaseControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/BaseControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/TestCreationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/TestCreationFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentServiceIntegrationClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentServiceIntegrationClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/comment/CommentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/deezer/DeezerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/deezer/DeezerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/payment/PaymentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/payment/PaymentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/payment/PaymentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/payment/PaymentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistServiceIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistServiceIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/playlist/PlaylistServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/report/ReportServiceFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/report/ReportServiceFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackApiControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackApiControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackServiceIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackServiceIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/track/TrackServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/lab4/demo/user/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="29OuGvVbMBkMfVIRaJUp9Hf7iVK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/" value="MySQL" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Gradle.backend [flywayMigrate]">
+    <configuration name="backend [flywayBaseline]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="flywayBaseline" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="backend [flywayMigrate]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="flywayMigrate" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="demo.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lab4.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lab4.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.backend [flywayMigrate]" />
+        <item itemvalue="Gradle.backend [flywayBaseline]" />
+        <item itemvalue="Spring Boot.DemoApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3184db65-d2ad-4daf-bb3e-a50f3142dbf4" name="Changes" comment="" />
+      <created>1652996361290</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652996361290</updated>
+      <workItem from="1652996362578" duration="517000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -7,7 +7,6 @@ import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.UserRepository;
 import com.lab4.demo.user.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -45,7 +44,7 @@ public class TrackService {
     public TrackDTO edit(Long id,TrackDTO trackDTO){
         Track track = getTrackById(id);
         track.setTitle(trackDTO.getTitle());
-        track.setLink(trackDTO.getLink());
+        track.setUrl(trackDTO.getLink());
         track.setDuration(trackDTO.getDuration());
         track.setExplicit_lyrics(trackDTO.getExplicit_lyrics());
         track.setPreview(trackDTO.getPreview());

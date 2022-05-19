@@ -2,6 +2,8 @@ plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+     id 'org.flywaydb.flyway' version '7.9.0'
+
 }
 group = 'com.lab4'
 version '1.0-SNAPSHOT'
@@ -95,8 +97,17 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.7'
     implementation 'javax.mail:javax.mail-api:1.6.2'
 
+     compile "org.flywaydb:flyway-core:7.9.0"
+
 }
 
 test {
     useJUnitPlatform()
+}
+
+flyway{
+    url='jdbc:mysql://localhost:3306'
+    user='root'
+    password='Dorothy'
+    schemas = ['music_player']
 }

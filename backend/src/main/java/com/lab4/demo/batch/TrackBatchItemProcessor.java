@@ -20,7 +20,7 @@ public class TrackBatchItemProcessor implements ItemProcessor<Track, Track> {
         String album = trackBatch.getAlbum();
         Boolean explicit_lyrics = trackBatch.getExplicit_lyrics();
         String preview = trackBatch.getPreview();
-        String link =trackBatch.getLink();
+        String link =trackBatch.getUrl();
         int duration = trackBatch.getDuration();
 
         Track transformedTrackBatch = new Track(id, artist, album, duration, explicit_lyrics, preview, link, title);
