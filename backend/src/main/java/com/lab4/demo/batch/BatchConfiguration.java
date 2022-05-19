@@ -39,7 +39,7 @@ public class BatchConfiguration {
 public FlatFileItemReader<Track> reader() {
     return new FlatFileItemReaderBuilder<Track>()
             .name("TrackBatchItemReader")
-            .resource(new ClassPathResource("Book1.csv"))
+            .resource(new ClassPathResource("Tracks.csv"))
             .delimited()
             .names("id", "artist", "album", "duration", "explicit_lyrics", "link","preview", "title")
             .fieldSetMapper(new BeanWrapperFieldSetMapper<Track>() {{
@@ -76,7 +76,7 @@ public FlatFileItemReader<Track> reader() {
     @Bean
     public Step step1(JdbcBatchItemWriter<Track> writer) {
 
-        trackRepository.deleteAll();
+       // trackRepository.deleteAll();
         return stepBuilderFactory.get("step1")
                 .<Track, Track> chunk(10)
                 .reader(reader())

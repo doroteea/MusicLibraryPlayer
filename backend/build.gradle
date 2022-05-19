@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+     id 'org.flywaydb.flyway' version '7.9.0'
 }
 group = 'com.lab4'
 version '1.0-SNAPSHOT'
@@ -103,8 +104,18 @@ dependencies {
     //sms
     implementation group: 'com.twilio.sdk', name: 'twilio', version: '8.30.0'
     implementation 'junit:junit:4.12'
+
+    //db migrations
+     compile "org.flywaydb:flyway-core:7.9.0"
 }
 
 test {
     useJUnitPlatform()
+}
+
+flyway{
+    url='jdbc:mysql://localhost:3306'
+    user='root'
+    password='Dorothy'
+    schemas = ['music_player']
 }

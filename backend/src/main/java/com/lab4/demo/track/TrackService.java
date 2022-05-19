@@ -7,7 +7,6 @@ import com.lab4.demo.track.model.dto.TrackDTO;
 import com.lab4.demo.user.UserRepository;
 import com.lab4.demo.user.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
