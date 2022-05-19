@@ -44,7 +44,7 @@ public class TrackService {
     public TrackDTO edit(Long id,TrackDTO trackDTO){
         Track track = getTrackById(id);
         track.setTitle(trackDTO.getTitle());
-        track.setUrl(trackDTO.getLink());
+        track.setLink(trackDTO.getLink());
         track.setDuration(trackDTO.getDuration());
         track.setExplicit_lyrics(trackDTO.getExplicit_lyrics());
         track.setPreview(trackDTO.getPreview());

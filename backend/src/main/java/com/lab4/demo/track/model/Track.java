@@ -21,7 +21,7 @@ public class Track {
     private String title;
 
     @Column(length = 512, nullable = false)
-    private String url;
+    private String link;
 
     @Column(length = 512, nullable = false)
     private int duration;
